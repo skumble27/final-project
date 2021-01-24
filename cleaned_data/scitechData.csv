@@ -1,4 +1,4 @@
-country,country_code,year,high_tech_export,patent_applications,science_publications,technology_grants_current_usd
+country,country_code,_year,high_tech_export,patent_applications,science_publications,technology_grants_current_usd
 Afghanistan,AFG,1960,0,0,0,1510000
 Afghanistan,AFG,1961,0,0,0,1620000
 Afghanistan,AFG,1962,0,0,0,1870000
