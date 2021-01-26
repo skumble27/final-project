@@ -3,7 +3,7 @@ console.log('Hello Tensorflow');
 async function train (pred) {
     const model = tf.sequential();
 
-    model.add(tf.layers.dense({units:1, inputShape:[1]}));
+    model.add(tf.layers.dense({units:1, inputShape:[1],activation: 'relu', kernelInitializer:'ones'}));
 
     model.compile({loss:'meanSquaredError', optimizer: tf.train.sgd(0.0001)});
 
@@ -22,7 +22,7 @@ async function train (pred) {
 
     console.log(scaledPred);
 
-    await model.fit(x,y, {epochs:1000});
+    await model.fit(x,y, {epochs:2000});
 
 
     let output = await(model.predict(tf.tensor2d([scaledPred],[1,1])).dataSync())[0];
@@ -33,5 +33,5 @@ async function train (pred) {
     console.log(conversion);
 
 };
-let val = 2100;
+let val = 2070;
 train(val);
