@@ -1,13 +1,17 @@
 console.log('Hello Tensorflow');
 
-async function train (pred) {
-    const model = tf.sequential();
+const model = tf.sequential();
+
+async function train () {
+    d3.selectAll('#training').html('');
+    d3.selectAll('#training').append('p').text("Training ML Model");
+    
 
     model.add(tf.layers.dense({units:1, inputShape:[1],activation: 'relu', kernelInitializer:'ones'}));
 
     model.compile({loss:'meanSquaredError', optimizer: tf.train.sgd(0.0001)});
 
-    console.log(pred);
+    
 
 
     const k = [1960,	1961,	1962,	1963,	1964,	1965,	1966,	1967,	1968,	1969,	1970,	1971,	1972,	1973,	1974,	1975,	1976,	1977,	1978,	1979,	1980,	1981,	1982,	1983,	1984,	1985,	1986,	1987,	1988,	1989,	1990,	1991,	1992,	1993,	1994,	1995,	1996,	1997,	1998,	1999,	2000,	2001,	2002,	2003,	2004,	2005,	2006,	2007,	2008,	2009,	2010,	2011,	2012,	2013,	2014,	2015,	2016,	2017,	2018,	2019,	2020];
@@ -18,20 +22,45 @@ async function train (pred) {
 
     console.log(MinMaxScaler(l));
 
+    await model.fit(x,y, {epochs:2000});
+
+    d3.selectAll('#complete').append('p').text("Training Complete, make a prediction");
+
+    
+
+};
+
+// Commencing the training model
+var training = d3.select("#trainmodel");
+training.on("click", train)
+
+var forecast = d3.select("#filter-btn");
+forecast.on('click', prediction);
+
+
+function prediction(){
+
+    let pred = d3.select('#forecast').property('value')
+
+
+    console.log(pred);
+
     let scaledPred = (pred - (Math.min.apply(Math, k)))/((Math.max.apply(Math, k))-(Math.min.apply(Math, k)));
 
     console.log(scaledPred);
 
-    await model.fit(x,y, {epochs:2000});
+    
 
-
-    let output = await(model.predict(tf.tensor2d([scaledPred],[1,1])).dataSync())[0];
+    let output = (model.predict(tf.tensor2d([scaledPred],[1,1])).dataSync())[0];
 
     console.log(output);
 
     let conversion = output*((Math.max.apply(Math, l))-(Math.min.apply(Math, l))) + (Math.min.apply(Math, l));
     console.log(conversion);
 
-};
-let val = 2070;
-train(val);
+    d3.selectAll('#determinevalue').append('p').text(conversion);
+
+}
+
+
+
