@@ -18,12 +18,11 @@
 }
 
 .health {
-    background-color: rgb(156, 156, 196);
+    background-image: url('images/stethescope.jgp');
+    background-size: cover;
     padding: 100px;
     text-align: center;
     border-radius: 25px;
-    border-style: solid;
-    border-color: red;
     
 }
 
