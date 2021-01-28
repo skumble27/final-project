@@ -77,6 +77,14 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/healthsector")
+def healthcare():
+    return render_template("healthsector.html")
+
+@app.route("/agriculturesector")
+def agriculture():
+    return render_template("agriculturesector.html")
+
 @app.route("/agriculture", methods=["GET"])
 def agriData():
     """List all available api routes."""
