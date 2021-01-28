@@ -4,31 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>Industry Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel='stylesheet' scr='text/css' href="{{url_for('static',filename = 'styles.css')}}">
+
+    <title>Sector Forecast</title>
+
 </head>
+
 <body>
-    <h1>Hello Everybody</h1>
-    <div class="btn-group" role="group">
-        <button type="button" id="trainmodel" class="btn btn-primary">click to  train</button>
-        <div id='training'>
-            <p></p>
-        </div>
-        <div id='complete'>
-            <p></p>
-        </div>
-
-    </div>
-    <div>
-        <input id='forecast' class="form-control" type="number" placeholder="enter year from 1960 and beyond">
-        <button id="filter-btn" type="button" class="btn">Filter Table</button>
-    </div>
-
-    <div id="determinevalue">
-        <h1>Predicted Value</h1>
-        <p></p>
-    </div>
     
+    <!-- As a link -->
+    
+    <nav class="navbarformat navbar-light">Sector Forecast</nav>
+
+    <div class="container">
+        <h1>Please Select the Sector Below</h1><hr><br>
+
+        <div class="row">
+            <div class="health col-md-6">
+                <a href="https://www.bootcampspot.com">Health Care Sector</a>            
+            </div>
+
+            <div class="col-md-6">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Sumukh Kumble, 2021</p>
+            </div>
+        </div>
+    
+    </footer>
+
 
 
 
@@ -41,10 +69,13 @@
 <!-- D3 javascript -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
+<!-- Plotly JavaScript Library -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 <!-- Custom Javascript Files -->
-<script src="{{url_for('static', filename='mathsfunctions.js')}}"></script>
-<script src="{{url_for('static', filename='practice.js')}}"></script>
-<script src="{{url_for('static', filename='linearreg.js')}}"></script>
-    
+<!-- <script src="{{url_for('static', filename='mathsfunctions.js')}}"></script> -->
+<!-- <script src="{{url_for('static', filename='health.js')}}"></script> -->
+
 </body>
+
 </html>
