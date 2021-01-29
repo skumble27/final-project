@@ -85,6 +85,14 @@ def healthcare():
 def agriculture():
     return render_template("agriculturesector.html")
 
+@app.route("/financesector")
+def finance():
+    return render_template("financesector.html")
+
+@app.route("/scitechsector")
+def scitech():
+    return render_template("scitechsector.html")
+
 @app.route("/agriculture", methods=["GET"])
 def agriData():
     """List all available api routes."""

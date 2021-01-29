@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,40 +16,38 @@
 </head>
 
 <body>
-    
+
     <!-- As a link -->
-    
+
     <nav class="navbarformat navbar-light">Sector Forecast</nav>
+    <br><br><br><br><br><br><br><br><br>
 
     <div class="container">
-        <h1>Please Select the Sector Below</h1><hr><br>
+        <h1 class='header'>Please Select the Sector Below</h1>
+        <hr><br>
 
         <div class="row">
             <div class="health col-md-6">
-                <a href="{{url_for('healthcare')}}">Health Care Sector</a>            
+                <a href="{{url_for('healthcare')}}">Health Care Sector</a>
             </div>
 
             <div class="agricutlure col-md-6">
                 <a href="{{url_for('agriculture')}}">Agricultural Sector</a>
             </div>
 
+        </div>
+        <div class="row">
+            <div class="finance col-md-6">
+                <a href="{{url_for('finance')}}">Financial Sector</a>
+            </div>
 
-
+            <div class="science col-md-6">
+                <a href="{{url_for('scitech')}}">Science and Technology Sector</a>
+            </div>
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
+    <br><br><br><br><br><br><br><br><br>
 
     <footer class="footer">
         <div class="row">
@@ -56,27 +55,27 @@
                 <p>Sumukh Kumble, 2021</p>
             </div>
         </div>
-    
+
     </footer>
 
 
 
 
 
-<!-- Tensorflow JS Script -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <!-- Tensorflow JS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 
 
-<!-- D3 javascript -->
-<script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- D3 javascript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
-<!-- Plotly JavaScript Library -->
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Plotly JavaScript Library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<!-- Custom Javascript Files -->
-<!-- <script src="{{url_for('static', filename='mathsfunctions.js')}}"></script> -->
-<!-- <script src="{{url_for('static', filename='health.js')}}"></script> -->
+    <!-- Custom Javascript Files -->
+    <!-- <script src="{{url_for('static', filename='mathsfunctions.js')}}"></script> -->
+    <!-- <script src="{{url_for('static', filename='health.js')}}"></script> -->
 
 </body>
 
