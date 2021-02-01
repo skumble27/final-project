@@ -61,7 +61,6 @@ for m in results4:
     e = {"country":m[0],"country_code":m[1],"_year":m[2],"high_tech_export":m[3],"patent_applications":m[4],"science_publications":m[5],"technology_grants_current_usd":m[6]}
     scitech.append(e)
 
-print(e)
 
 #################################################
 # Flask Setup

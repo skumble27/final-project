@@ -52,7 +52,7 @@ SELECT * FROM finance
 CREATE TABLE health (
 	country VARCHAR,
 	country_code VARCHAR,
-	_year REAL,
+	_year VARCHAR,
 	population REAL,
 	gdp_current_usd REAL,
 	total_cancer_cases REAL,
