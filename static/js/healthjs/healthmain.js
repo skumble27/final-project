@@ -9,17 +9,17 @@ var myMap = L.map("healthmapid", {
 
 // Adding a base map tile layer
 L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-    tileSize: 512,
-    maxZoom: 18,
-    zoomOffset: -1,
-    id: "mapbox/light-v10",
-    accessToken: API_KEY
-  }).addTo(myMap);
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/light-v10",
+  accessToken: API_KEY
+}).addTo(myMap);
 
 // Creating a function that will highlight the colours of the continent for which country it belongs to
-function chooseColor(continent){
-  switch(continent){
+function chooseColor(continent) {
+  switch (continent) {
     case "Asia":
       return "yellow";
     case "South Asia":
@@ -46,17 +46,17 @@ function chooseColor(continent){
 var geoJson;
 
 // Loading the GeoJson Data
-d3.json(link).then(function(data){
+d3.json(link).then(function (data) {
 
-// Testing to see if the Geojson data loads
+  // Testing to see if the Geojson data loads
   console.log(data);
 
-    // Creating a GeoJson layer with the dataset
-  geoJson = L.geoJson(data,{
+  // Creating a GeoJson layer with the dataset
+  geoJson = L.geoJson(data, {
 
-      // Adding style to the layer
-    style: function(feature){
-      return{
+    // Adding style to the layer
+    style: function (feature) {
+      return {
         color: 'white',
 
         // Calling the choose color function to add to the continents
@@ -66,22 +66,44 @@ d3.json(link).then(function(data){
       }
     }
   }).addTo(myMap);
-    // This code will return the selected country in which to filter the data and display information that is related to that particular country.
-  geoJson.on('click', function(e){
+  // This code will return the selected country in which to filter the data and display information that is related to that particular country.
+  geoJson.on('click', function (e) {
     let chosenCountry = e.layer.feature.properties.ADMIN;
     d3.selectAll('#healthdataplotly').html('');
     d3.selectAll('#healthpredict').html('');
-    d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data`);
-    d3.selectAll('#healthpredict').append('h1').text(`10 year forecast for ${chosenCountry}`);
 
-    
+    d3.selectAll('#totalbirths').html('');
+    d3.selectAll('#totaldeaths').html('');
+    d3.selectAll('#dtp').html('');
+    d3.selectAll('#life').html('');
+    d3.selectAll('#measles').html('');
+    d3.selectAll('#cancercases').html('');
+    d3.selectAll('#cancerdeaths').html('');
+    d3.selectAll('#obesity').html('');
+
+    d3.selectAll('#predtotalbirths').html('');
+    d3.selectAll('#predtotaldeaths').html('');
+    d3.selectAll('#preddtp').html('');
+    d3.selectAll('#predlife').html('');
+    d3.selectAll('#predmeasles').html('');
+    d3.selectAll('#predcancercases').html('');
+    d3.selectAll('#predcancerdeaths').html('');
+    d3.selectAll('#predobesity').html('');
+
+
+
+
+    d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data`);
+    d3.selectAll('#healthpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
+
+
     console.log(chosenCountry);
     healthDataUnpack(chosenCountry);
     healthPredict(chosenCountry);
-    
-    
-    })
-    
+
+
+  })
+
 })
 
 
