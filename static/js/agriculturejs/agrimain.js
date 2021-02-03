@@ -102,13 +102,29 @@ d3.json(link).then(function (data) {
     console.log(chosenCountry);
 
     d3.selectAll('#agridataplotly').html('');
+    d3.selectAll('#agripredict').html('');
 
+    d3.selectAll('#agriland').html('');
+    d3.selectAll('#forestland').html('');
+    d3.selectAll('#cereal').html('');
+    d3.selectAll('#cashcrop').html('');
+    d3.selectAll('#employmentag').html('');
+    d3.selectAll('#livestock').html('');
+
+    d3.selectAll('#predagri').html('');
+    d3.selectAll('#predfor').html('');
+    d3.selectAll('#predcereal').html('');
+    d3.selectAll('#predcash').html('');
+    d3.selectAll('#predemp').html('');
+    d3.selectAll('#predlive').html('');
 
 
 
     d3.selectAll('#agridataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Agricultural Sector Data`);
+    d3.selectAll('#agripredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`)
 
     agriDataUnpack(chosenCountry);
+    agriPredict(chosenCountry);
 
   })
 

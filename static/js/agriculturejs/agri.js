@@ -4,11 +4,11 @@ async function agriDataUnpack(id) {
     await d3.json('http://127.0.0.1:5000/compileddata').then(function (data) {
 
         // Checking to see if the datasets load
-        console.log(data);
+        // console.log(data);
 
         // Filtering by country
         let countryFilter = data.filter(nation => nation.country === id);
-        console.log(countryFilter);
+        // console.log(countryFilter);
 
         // Creating a list of empty arrays in which append
         let landArea = [];
@@ -40,35 +40,44 @@ async function agriDataUnpack(id) {
             population.push(countryFilter[key].population);
             gdp.push(countryFilter[key].gdp_current_usd);
         })
-        console.log(liveStockProd);
+        // console.log(liveStockProd);
 
 
         // Creating a trace to plot the data
         var agriTrace = {
             type: 'scatter',
             mode: 'lines',
-            name: 'Agricultural Land Area (ha)',
+            name: 'Agricultural Land Area',
             x: year,
             y: agriLand,
-            line: { color: '#429e8f' }
+            line: {
+                color: '#429e8f',
+                width: 3
+            }
         }
 
         var forestTrace = {
             type: 'scatter',
             mode: 'lines',
-            name: 'Forest Land Area (ha)',
+            name: 'Forest Land Area',
             x: year,
             y: forestLand,
-            line: { color: '#429e8f' }
+            line: {
+                color: '#429e8f',
+                width: 3
+            }
         }
 
         var cerealTrace = {
             type: 'scatter',
             mode: 'lines',
-            name: 'Cereal Yield kg/ha',
+            name: 'Cereal Yield',
             x: year,
             y: cerealYield,
-            line: { color: '#429e8f' }
+            line: {
+                color: '#429e8f',
+                width: 3
+            }
         }
 
         var cashCropTrace = {
@@ -77,7 +86,10 @@ async function agriDataUnpack(id) {
             name: 'Cash Crop Yield',
             x: year,
             y: cashCropYield,
-            line: { color: '#429e8f' }
+            line: {
+                color: '#429e8f',
+                width: 3
+            }
         }
 
         var employmentAgTrace = {
@@ -86,7 +98,10 @@ async function agriDataUnpack(id) {
             name: 'Employment in Agriculture',
             x: year,
             y: employmentAg,
-            line: { color: '#429e8f' }
+            line: {
+                color: '#429e8f',
+                width: 3
+            }
         }
 
         var liveStockTrace = {
@@ -95,7 +110,10 @@ async function agriDataUnpack(id) {
             name: 'Live Stock Production',
             x: year,
             y: liveStockProd,
-            line: { color: '#429e8f' }
+            line: {
+                color: '#429e8f',
+                width: 3
+            }
         }
 
         var agriData = [agriTrace];
@@ -107,7 +125,7 @@ async function agriDataUnpack(id) {
 
         // Creating a Layout for the plots
         var agriLayout = {
-            title: `Agricultural Land Area (ha)`,
+            title: `Agricultural Land Area`,
             showlegend: true,
             legend: {
                 y: 0.5,
@@ -118,7 +136,7 @@ async function agriDataUnpack(id) {
                 family: 'Arial'
             },
             yaxis: {
-                title: `Agricultural Land Area`,
+                title: `Agricultural Land Area (ha)`,
                 titlefont: { color: 'black' },
                 tickfont: { color: 'black' },
                 showgrid: false,
@@ -140,14 +158,14 @@ async function agriDataUnpack(id) {
 
             },
             paper_bgcolor: '#fff9e9',
-            plot_bgcolor:  '#fff9e9'
+            plot_bgcolor: '#fff9e9'
         };
 
 
         Plotly.newPlot('agriland', agriData, agriLayout);
 
         var forestLayout = {
-            title: `Forest Land Area (ha)`,
+            title: `Forest Land Area`,
             showlegend: true,
             legend: {
                 y: 0.5,
@@ -158,7 +176,7 @@ async function agriDataUnpack(id) {
                 family: 'Arial'
             },
             yaxis: {
-                title: `Forest Land Area`,
+                title: `Forest Land Area (ha)`,
                 titlefont: { color: 'black' },
                 tickfont: { color: 'black' },
                 showgrid: false,
@@ -180,18 +198,167 @@ async function agriDataUnpack(id) {
 
             },
             paper_bgcolor: '#fff9e9',
-            plot_bgcolor:  '#fff9e9'
+            plot_bgcolor: '#fff9e9'
         };
 
 
         Plotly.newPlot('forestland', forestData, forestLayout);
 
+        var cerealLayout = {
+            title: `Cereal Crop Yield`,
+            showlegend: true,
+            legend: {
+                y: 0.5,
+                x: 1.2
+            },
+            font: {
+                color: 'black',
+                family: 'Arial'
+            },
+            yaxis: {
+                title: `Cereal Crop Yield (kg/ha)`,
+                titlefont: { color: 'black' },
+                tickfont: { color: 'black' },
+                showgrid: false,
+                gridcolor: 'black',
+                zerolinecolor: 'black'
+
+            },
+
+            xaxis: {
+                autorange: true,
+                range: [1961, 2018],
+                rangeslider: { range: ['1961', '2018'] },
+                type: 'date',
+                shogrid: true,
+                gridcolor: 'black',
+                tickfont: { color: 'black' },
+                zerolinecolor: 'black'
 
 
+            },
+            paper_bgcolor: '#fff9e9',
+            plot_bgcolor: '#fff9e9'
+        };
 
 
+        Plotly.newPlot('cereal', cerealData, cerealLayout);
+
+        var cashCropLayout = {
+            title: `Cash Crop Yield`,
+            showlegend: true,
+            legend: {
+                y: 0.5,
+                x: 1.2
+            },
+            font: {
+                color: 'black',
+                family: 'Arial'
+            },
+            yaxis: {
+                title: `Cash Crop Yield (kg/ha)`,
+                titlefont: { color: 'black' },
+                tickfont: { color: 'black' },
+                showgrid: false,
+                gridcolor: 'black',
+                zerolinecolor: 'black'
+
+            },
+
+            xaxis: {
+                autorange: true,
+                range: [1961, 2018],
+                rangeslider: { range: ['1961', '2018'] },
+                type: 'date',
+                shogrid: true,
+                gridcolor: 'black',
+                tickfont: { color: 'black' },
+                zerolinecolor: 'black'
 
 
+            },
+            paper_bgcolor: '#fff9e9',
+            plot_bgcolor: '#fff9e9'
+        };
+
+
+        Plotly.newPlot('cashcrop', cashCropData, cashCropLayout);
+
+        var empLayout = {
+            title: `Employment in Agriculture`,
+            showlegend: true,
+            legend: {
+                y: 0.5,
+                x: 1.2
+            },
+            font: {
+                color: 'black',
+                family: 'Arial'
+            },
+            yaxis: {
+                title: `Employment in Agriculture (%)`,
+                titlefont: { color: 'black' },
+                tickfont: { color: 'black' },
+                showgrid: false,
+                gridcolor: 'black',
+                zerolinecolor: 'black'
+
+            },
+
+            xaxis: {
+                autorange: true,
+                range: [1961, 2018],
+                rangeslider: { range: ['1961', '2018'] },
+                type: 'date',
+                shogrid: true,
+                gridcolor: 'black',
+                tickfont: { color: 'black' },
+                zerolinecolor: 'black'
+
+
+            },
+            paper_bgcolor: '#fff9e9',
+            plot_bgcolor: '#fff9e9'
+        };
+
+        Plotly.newPlot('employmentag', employmentData, empLayout);
+
+        var LiveStockLayout = {
+            title: `Livestock Production`,
+            showlegend: true,
+            legend: {
+                y: 0.5,
+                x: 1.2
+            },
+            font: {
+                color: 'black',
+                family: 'Arial'
+            },
+            yaxis: {
+                title: `Livestock Production (2004-2006 index=100)`,
+                titlefont: { color: 'black' },
+                tickfont: { color: 'black' },
+                showgrid: false,
+                gridcolor: 'black',
+                zerolinecolor: 'black'
+
+            },
+
+            xaxis: {
+                autorange: true,
+                range: [1961, 2018],
+                rangeslider: { range: ['1961', '2018'] },
+                type: 'date',
+                shogrid: true,
+                gridcolor: 'black',
+                tickfont: { color: 'black' },
+                zerolinecolor: 'black'
+            },
+            paper_bgcolor: '#fff9e9',
+            plot_bgcolor: '#fff9e9'
+        };
+
+        Plotly.newPlot('livestock', liveStockData, LiveStockLayout);
 
     })
 }

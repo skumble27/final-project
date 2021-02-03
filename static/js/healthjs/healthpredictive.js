@@ -6,7 +6,7 @@ async function healthPredict(id) {
 
         // Checking to see if the dataset has been read
         // console.log(data);
-
+        
         // Filtering by country
         let countryFilter = data.filter(nation => nation.country === id);
         console.log(countryFilter);
@@ -163,8 +163,8 @@ async function healthPredict(id) {
         await cancercasetrain.fit(yearTF, cancerCasesTF, {epochs:100});
         await cancerdeathtrain.fit(yearTF, cancerDeathsTF, {epochs:100});
         await obesitytrain.fit(yearTF, obesityTF, {epochs:100});
-        await populationtrain.fit(yearTF, obesityTF, {epochs:100});
-        await gdptrain.fit(yearTF, obesityTF, {epochs:100});
+        await populationtrain.fit(yearTF, populationTF, {epochs:100});
+        await gdptrain.fit(yearTF, gdpTF, {epochs:100});
 
         // Announce to the user that the training is complete
 

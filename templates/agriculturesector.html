@@ -72,6 +72,35 @@
             </div>
 
         </div>
+        <div class="row">
+            <div id='agripredict' class="agri col-md-12">
+                <h1></h1>
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Plotting the time series -->
+                <div id='predagri'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predfor'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predcereal'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predcash'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predemp'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predlive'></div>
+            </div>
+        </div>
 
 
     </div>
@@ -110,7 +139,7 @@
     <script src="{{url_for('static', filename='js/config.js')}}"></script>
     <script src="{{url_for('static', filename='js/mathsfunctions.js')}}"></script>
     <script src="{{url_for('static', filename='js/agriculturejs/agri.js')}}"></script>
-
+    <script src="{{url_for('static', filename='js/agriculturejs/agripredict.js')}}"></script>
     <script src="{{url_for('static', filename='js/agriculturejs/agrimain.js')}}"></script>
 
 </body>

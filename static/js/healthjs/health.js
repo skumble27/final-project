@@ -52,7 +52,7 @@ async function healthDataUnpack(id) {
         })
 
 
-        // Creating a trace for number of births
+        // Creating a trace for number all y variables
         var birthsTrace = {
             type: 'scatter',
             mode: 'lines',
