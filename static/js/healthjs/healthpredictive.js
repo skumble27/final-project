@@ -218,7 +218,9 @@ async function healthPredict(id) {
                 color: 'black',
                 family: 'Arial',
                 size: 16
-            }
+            },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         var birthValues = [predYears, tenYearBirth]
 

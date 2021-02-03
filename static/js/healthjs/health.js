@@ -187,6 +187,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         var deathsLayout = {
             title: `Total Deaths`,
@@ -221,6 +223,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
 
         var dtpLayout = {
@@ -256,6 +260,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         var lifeLayout = {
             title: `Average Life Expectency`,
@@ -290,6 +296,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
 
         var measlesLayout = {
@@ -325,6 +333,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         var cancerCaseLayout = {
             title: `Total Cancer Cases`,
@@ -359,6 +369,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
 
         var cancerDeathsLayout = {
@@ -394,6 +406,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
 
         var obesityLayout = {
@@ -429,6 +443,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         var populationLayout = {
             title: `Population`,
@@ -463,6 +479,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         var gdpLayout = {
             title: `Gross Domestic Product`,
@@ -497,6 +515,8 @@ async function healthDataUnpack(id) {
 
 
             },
+            paper_bgcolor: '#fffafb',
+            plot_bgcolor: '#fffafb'
         };
         Plotly.newPlot('gdp', gdpData, gdpLayout);
         Plotly.newPlot('population', populationData, populationLayout);
