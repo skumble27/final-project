@@ -43,8 +43,36 @@
             <div class="col-md-12">
                 <div class="mapformat" id='agrimapid'></div>
             </div>
+        </div><br><br>
+        <div class="row">
+            <div id='agridataplotly' class="agri col-md-12">
+                <h1></h1>
+            </div>
+        </div>
+
+        <!-- Plotting the Time Series -->
+        <div class="row">
+            <div class="col-md-6">
+                <div id='agriland'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='forestland'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='cereal'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='cashcrop'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='employmentag'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='livestock'></div>
+            </div>
 
         </div>
+
 
     </div>
 
@@ -78,11 +106,11 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!-- Custom JavaScript Libraries -->
-    
+
     <script src="{{url_for('static', filename='js/config.js')}}"></script>
     <script src="{{url_for('static', filename='js/mathsfunctions.js')}}"></script>
     <script src="{{url_for('static', filename='js/agriculturejs/agri.js')}}"></script>
-    
+
     <script src="{{url_for('static', filename='js/agriculturejs/agrimain.js')}}"></script>
 
 </body>

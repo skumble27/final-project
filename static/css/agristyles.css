@@ -56,6 +56,21 @@
     
 }
 
+.agri h1, h3, p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.agri h3 {
+    color: #d91657;
+
+}
+
+.agri p {
+    color: #16d954;
+}
+
 body{
-    background-color: rgb(255, 243, 226);
+    background-color:#fff9e9;
 }

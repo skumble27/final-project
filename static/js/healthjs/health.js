@@ -3,7 +3,7 @@ async function healthDataUnpack(id) {
     
     console.log(id);
 
-    await d3.json('http://127.0.0.1:5000/health').then(function (data) {
+    await d3.json('http://127.0.0.1:5000/compileddata').then(function (data) {
 
         // Checking to see if the dataset has been read
         // console.log(data);

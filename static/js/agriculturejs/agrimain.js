@@ -101,6 +101,13 @@ d3.json(link).then(function (data) {
     let chosenCountry = e.layer.feature.properties.ADMIN;
     console.log(chosenCountry);
 
+    d3.selectAll('#agridataplotly').html('');
+
+
+
+
+    d3.selectAll('#agridataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Agricultural Sector Data`);
+
     agriDataUnpack(chosenCountry);
 
   })

@@ -49,7 +49,7 @@ CREATE TABLE finance (
 
 SELECT * FROM finance
 
-CREATE TABLE health (
+CREATE TABLE compileddata (
 	country VARCHAR,
 	country_code VARCHAR,
 	_year VARCHAR,
@@ -62,10 +62,30 @@ CREATE TABLE health (
 	death_rate REAL,
 	life_expectency REAL,
 	dtp_immunisation REAL,
-	measles_immunisation REAL
+	measles_immunisation REAL,
+	land_area_ha REAL,
+	agri_land_pct REAL,
+	forest_area_pct REAL,
+	cereal_yield_kg_ha REAL,
+	cash_crop_yield_kg_ha REAL,
+	employment_agri_pct REAL,
+	livestock_production_100_index REAL,
+	atm_per_100000 REAL,
+	borrowers_from_banks REAL,
+	broad_money_growth_pct REAL,
+	listed_domestic_companies REAL,
+	foreign_investment_gdp REAL,
+	inflation_pct REAL,
+	stocks_traded_pct_gdp REAL,
+	total_reserves REAL,
+	high_tech_export REAL,
+	patent_applications REAL,
+	science_publications REAL,
+	technology_grants_current_usd REAL
+
 )
 
-SELECT * FROM health
+SELECT * FROM compileddata
 
 CREATE TABLE scitech (
 	country VARCHAR,
