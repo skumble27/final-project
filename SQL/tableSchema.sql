@@ -1,7 +1,7 @@
 CREATE TABLE agriculture (
 	country VARCHAR,
 	country_code VARCHAR,
-	_year REAL,
+	_year VARCHAR,
 	population REAL,
 	gdp_current_usd REAL,
 	land_area_ha REAL,
@@ -18,7 +18,7 @@ SELECT * FROM agriculture
 CREATE TABLE environment (
 	country VARCHAR,
 	country_code VARCHAR,
-	_year REAL,
+	_year VARCHAR,
 	population REAL,
 	gdp_current_usd REAL,
 	pm2_5_air_pollution REAL,
@@ -33,7 +33,7 @@ SELECT * FROM environment
 CREATE TABLE finance (
 	country VARCHAR,
 	country_code VARCHAR,
-	_year REAL,
+	_year VARCHAR,
 	population REAL,
 	gdp_current_usd REAL,
 	atm_per_100000 REAL,
@@ -70,7 +70,7 @@ SELECT * FROM health
 CREATE TABLE scitech (
 	country VARCHAR,
 	country_code VARCHAR,
-	_year REAL,
+	_year VARCHAR,
 	high_tech_export REAL,
 	patent_applications REAL,
 	science_publications REAL,

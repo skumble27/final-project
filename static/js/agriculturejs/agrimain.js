@@ -2,7 +2,7 @@
 var link = 'static/countries.geojson'
 
 // Creating a map Object and zoomed out to show the world
-var myMap = L.map("healthmapid", {
+var myMap = L.map("agrimapid", {
   center: [-5.067383325760818, 77.08252432997061],
   zoom: 3
 });
@@ -99,43 +99,9 @@ d3.json(link).then(function (data) {
   // This code will return the selected country in which to filter the data and display information that is related to that particular country.
   geoJson.on('click', function (e) {
     let chosenCountry = e.layer.feature.properties.ADMIN;
-
-    d3.selectAll('#healthdataplotly').html('');
-    d3.selectAll('#healthpredict').html('');
-
-    d3.selectAll('#totalbirths').html('');
-    d3.selectAll('#totaldeaths').html('');
-    d3.selectAll('#dtp').html('');
-    d3.selectAll('#life').html('');
-    d3.selectAll('#measles').html('');
-    d3.selectAll('#cancercases').html('');
-    d3.selectAll('#cancerdeaths').html('');
-    d3.selectAll('#obesity').html('');
-    d3.selectAll('#population').html('');
-    d3.selectAll('#gdp').html('');
-
-    d3.selectAll('#predtotalbirths').html('');
-    d3.selectAll('#predtotaldeaths').html('');
-    d3.selectAll('#preddtp').html('');
-    d3.selectAll('#predlife').html('');
-    d3.selectAll('#predmeasles').html('');
-    d3.selectAll('#predcancercases').html('');
-    d3.selectAll('#predcancerdeaths').html('');
-    d3.selectAll('#predobesity').html('');
-    d3.selectAll('#predpopulation').html('');
-    d3.selectAll('#predgdp').html('');
-
-
-
-
-    d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data`);
-    d3.selectAll('#healthpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
-
-
     console.log(chosenCountry);
-    healthDataUnpack(chosenCountry);
-    healthPredict(chosenCountry);
 
+    agriDataUnpack(chosenCountry);
 
   })
 

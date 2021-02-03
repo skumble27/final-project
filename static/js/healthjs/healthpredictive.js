@@ -9,7 +9,7 @@ async function healthPredict(id) {
 
         // Filtering by country
         let countryFilter = data.filter(nation => nation.country === id);
-        // console.log(countryFilter);
+        console.log(countryFilter);
 
         // Creating a list of empty arrays for later appendage
 
@@ -23,6 +23,7 @@ async function healthPredict(id) {
         let cancerCases = [];
         let cancerDeaths = [];
         let obesity = [];
+
 
 
         // Creating a time parse for date
@@ -70,6 +71,8 @@ async function healthPredict(id) {
         const cancercasetrain = tf.sequential();
         const cancerdeathtrain = tf.sequential();
         const obesitytrain = tf.sequential();
+        const populationtrain = tf.sequential();
+        const gdptrain = tf.sequential();
 
         // Creating a 10 year forecast
         let predYears = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
@@ -86,13 +89,15 @@ async function healthPredict(id) {
         let cancerCasesTF = tf.tensor2d(MinMaxScaler(cancerCases), [cancerCases.length, 1]);
         let cancerDeathsTF = tf.tensor2d(MinMaxScaler(cancerDeaths), [cancerDeaths.length, 1]);
         let obesityTF = tf.tensor2d(MinMaxScaler(obesity), [obesity.length, 1]);
+        let populationTF = tf.tensor2d(MinMaxScaler(population), [population.length, 1]);
+        let gdpTF = tf.tensor2d(MinMaxScaler(gdp), [gdp.length, 1]);
 
         // Scaling the predictive years
         let yearsScaled = yearScale(predYears);
         console.log(MinMaxScaler(intYear));
         console.log(yearsScaled);
 
-        d3.selectAll('#healthpredict').append('h3').text("Training in progress");
+        d3.selectAll('#healthpredict').append('h3').text("Machine Learning in progress");
 
 
 
@@ -138,6 +143,16 @@ async function healthPredict(id) {
         obesitytrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
         obesitytrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
+        populationtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
+        populationtrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
+        populationtrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
+        populationtrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
+
+        gdptrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
+        gdptrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
+        gdptrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
+        gdptrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
+
 
         // Making a prediction on the data for Births
         await birthtrain.fit(yearTF, brithRateTF, {epochs:100});
@@ -148,11 +163,13 @@ async function healthPredict(id) {
         await cancercasetrain.fit(yearTF, cancerCasesTF, {epochs:100});
         await cancerdeathtrain.fit(yearTF, cancerDeathsTF, {epochs:100});
         await obesitytrain.fit(yearTF, obesityTF, {epochs:100});
+        await populationtrain.fit(yearTF, obesityTF, {epochs:100});
+        await gdptrain.fit(yearTF, obesityTF, {epochs:100});
 
         // Announce to the user that the training is complete
 
 
-        d3.selectAll('#healthpredict').append('p').text("Training Complete, forecast available below");
+        d3.selectAll('#healthpredict').append('p').text("Machine Learning Complete, forecasts are available below");
 
         let birthpredict = await birthtrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
         let deathpredict = await deathtrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
@@ -162,6 +179,9 @@ async function healthPredict(id) {
         let cancercasepredict = await cancercasetrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
         let cancerdeathpredict = await cancerdeathtrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
         let obesitypredict = await obesitytrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let populationpredict = await populationtrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let gdppredict = await gdptrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+
 
         // Converting the Tensor objects back to arrays
         let birthpredictScaled = Array.from(birthpredict);
@@ -172,6 +192,8 @@ async function healthPredict(id) {
         let cancercasepredictScaled = Array.from(cancercasepredict);
         let cancerdeathpredictScaled = Array.from(cancerdeathpredict);
         let obesitypredictScaled = Array.from(obesitypredict);
+        let populationpredictScaled = Array.from(populationpredict);
+        let gdppredictScaled = Array.from(gdppredict);
 
 
 
@@ -183,6 +205,8 @@ async function healthPredict(id) {
         let tenYearCancerCase = conversion(maxArray(cancerCases), minArray(cancerCases), cancercasepredictScaled);
         let tenYearCancerDeaths = conversion(maxArray(cancerDeaths), minArray(cancerDeaths), cancerdeathpredictScaled);
         let tenYearObesity = conversion(maxArray(obesity), minArray(obesity), obesitypredictScaled);
+        let tenYearPopulation = conversion(maxArray(population), minArray(population), populationpredictScaled);
+        let tenYeargdp = conversion(maxArray(gdp), minArray(gdp), gdppredictScaled);
 
 
         console.log(tenYearBirth);
@@ -363,6 +387,48 @@ async function healthPredict(id) {
         }]
 
         Plotly.newPlot('predobesity', obesitydata, layout);
+
+        var populationValues = [predYears, tenYearPopulation]
+
+        var populationdata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Predicted Population</b>"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#d91657" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: populationValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predpopulation', populationdata, layout);
+
+        var gdpValues = [predYears, tenYeargdp]
+
+        var gdpdata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Predicted Gross Domestic Product</b>"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#d91657" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: gdpValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predgdp', gdpdata, layout);
 
 
 

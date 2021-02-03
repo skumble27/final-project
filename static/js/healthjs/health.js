@@ -124,8 +124,23 @@ async function healthDataUnpack(id) {
             line: { color: '#3483eb' }
         }
 
+        var populationTrace = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Population`,
+            x: year,
+            y: population,
+            line: { color: '#3483eb' }
+        }
 
-
+        var gdpTrace = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Gross Domestic Product`,
+            x: year,
+            y: gdp,
+            line: { color: '#3483eb' }
+        }
 
         var obesityData = [obesityTrace];
         var cancerDeathsData = [cancerDeathsTrace];
@@ -135,6 +150,9 @@ async function healthDataUnpack(id) {
         var dtpData = [dtpImmTrace];
         var birthData = [birthsTrace];
         var deathData = [deathsTrace];
+        var populationData = [populationTrace];
+        var gdpData = [gdpTrace];
+        
 
         var birthLayout = {
             title: `Total Births`,
@@ -412,6 +430,76 @@ async function healthDataUnpack(id) {
 
             },
         };
+        var populationLayout = {
+            title: `Population`,
+            showlegend: true,
+            legend: {
+                y: 0.5,
+                x: 1.2
+            },
+            font: {
+                color: '#3483eb',
+                family: 'Arial'
+            },
+            yaxis: {
+                title: `Population`,
+                titlefont: { color: '#3483eb' },
+                tickfont: { color: '#3483eb' },
+                showgrid: false,
+                gridcolor: '#3483eb',
+                zerolinecolor: '#3483eb'
+
+            },
+
+            xaxis: {
+                autorange: true,
+                range: [1961, 2018],
+                rangeslider: { range: ['1961', '2018'] },
+                type: 'date',
+                shogrid: true,
+                gridcolor: '#3483eb',
+                tickfont: { color: '#3483eb' },
+                zerolinecolor: '#3483eb'
+
+
+            },
+        };
+        var gdpLayout = {
+            title: `Gross Domestic Product`,
+            showlegend: true,
+            legend: {
+                y: 0.5,
+                x: 1.2
+            },
+            font: {
+                color: '#3483eb',
+                family: 'Arial'
+            },
+            yaxis: {
+                title: `Gross Domestic Product`,
+                titlefont: { color: '#3483eb' },
+                tickfont: { color: '#3483eb' },
+                showgrid: false,
+                gridcolor: '#3483eb',
+                zerolinecolor: '#3483eb'
+
+            },
+
+            xaxis: {
+                autorange: true,
+                range: [1961, 2018],
+                rangeslider: { range: ['1961', '2018'] },
+                type: 'date',
+                shogrid: true,
+                gridcolor: '#3483eb',
+                tickfont: { color: '#3483eb' },
+                zerolinecolor: '#3483eb'
+
+
+            },
+        };
+        Plotly.newPlot('gdp', gdpData, gdpLayout);
+        Plotly.newPlot('population', populationData, populationLayout);
         Plotly.newPlot('obesity', obesityData, obesityLayout);
         Plotly.newPlot('cancerdeaths', cancerDeathsData, cancerDeathsLayout);
         Plotly.newPlot('cancercases', cancerCasesData, cancerCaseLayout);

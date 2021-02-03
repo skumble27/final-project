@@ -75,3 +75,11 @@
     background-color: rgb(32, 122, 179);
     
 }
+
+.leaflet-popup-content-wrapper {
+    background-color: rgb(32, 122, 179);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
