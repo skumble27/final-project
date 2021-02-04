@@ -62,13 +62,13 @@ async function financePredict(id) {
         let predYears = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
 
         // Converting arrays to tensorflow arrays
-        let broadMoneyTF = tf.tensor2d(MinMaxScaler(broadMoneyGrowth), [broadMoneyGrowth.length,1]);
-        let domesticCompanyTF = tf.tensor2d(MinMaxScaler(domesticCompanies),[domesticCompanies.length,1]);
-        let foreignTF = tf.tensor2d(MinMaxScaler(foreignInvestment),[foreignInvestment.length,1]);
-        let inflationTF = tf.tensor2d(MinMaxScaler(inflation),[inflation.length,1]);
-        let stockTF = tf.tensor2d(MinMaxScaler(stockTrade),[stockTrade.length,1]);
-        let totalReserveTF = tf.tensor2d(MinMaxScaler(totalReserves), [totalReserves.length,1]);
-        let gdpTF = tf.tensor2d(MinMaxScaler(gdp),[gdp.length,1]);
+        let broadMoneyTF = tf.tensor2d(MinMaxScaler(broadMoneyGrowth), [broadMoneyGrowth.length, 1]);
+        let domesticCompanyTF = tf.tensor2d(MinMaxScaler(domesticCompanies), [domesticCompanies.length, 1]);
+        let foreignTF = tf.tensor2d(MinMaxScaler(foreignInvestment), [foreignInvestment.length, 1]);
+        let inflationTF = tf.tensor2d(MinMaxScaler(inflation), [inflation.length, 1]);
+        let stockTF = tf.tensor2d(MinMaxScaler(stockTrade), [stockTrade.length, 1]);
+        let totalReserveTF = tf.tensor2d(MinMaxScaler(totalReserves), [totalReserves.length, 1]);
+        let gdpTF = tf.tensor2d(MinMaxScaler(gdp), [gdp.length, 1]);
         let yearTF = tf.tensor2d(MinMaxScaler(intYear), [intYear.length, 1]);
 
         // Scaling the predictive years
@@ -76,9 +76,9 @@ async function financePredict(id) {
         console.log(intYear);
         console.log(yearsScaled);
 
-        
+
         d3.selectAll('#financepredict').append('h3').text("Machine Learning in progress");
-        
+
         // Creating the Neural Networks
         broadMoneyTrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
         broadMoneyTrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
@@ -116,13 +116,13 @@ async function financePredict(id) {
         gdpTrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
         // Training the Neural Networks
-        await broadMoneyTrain.fit(yearTF, broadMoneyTF, {epochs:100});
-        await domesticTrain.fit(yearTF, domesticCompanyTF, {epochs:100});
-        await foreignTrain.fit(yearTF, foreignTF, {epochs:100});
-        await inflationTrain.fit(yearTF, inflationTF, {epochs:100});
-        await stockTrain.fit(yearTF, stockTF, {epochs:100});
-        await totalReservesTrain.fit(yearTF, totalReserveTF, {epochs:100});
-        await gdpTrain.fit(yearTF, gdpTF, {epochs:100});
+        await broadMoneyTrain.fit(yearTF, broadMoneyTF, { epochs: 100 });
+        await domesticTrain.fit(yearTF, domesticCompanyTF, { epochs: 100 });
+        await foreignTrain.fit(yearTF, foreignTF, { epochs: 100 });
+        await inflationTrain.fit(yearTF, inflationTF, { epochs: 100 });
+        await stockTrain.fit(yearTF, stockTF, { epochs: 100 });
+        await totalReservesTrain.fit(yearTF, totalReserveTF, { epochs: 100 });
+        await gdpTrain.fit(yearTF, gdpTF, { epochs: 100 });
 
         // Announce to the user the training is complete
 
@@ -130,27 +130,65 @@ async function financePredict(id) {
 
         // Making the prediction
 
-        let broadMoneyPredict = broadMoneyTrain.predict(tf.tensor2d(yearsScaled,[yearsScaled.length,1])).dataSync();
-        let domesticPredict = domesticTrain.predict(tf.tensor2d(yearsScaled,[yearsScaled.length,1])).dataSync();
-        let foreignPredict = foreignTrain.predict(tf.tensor2d(yearsScaled,[yearsScaled.length,1])).dataSync();
-        let inflationPredict = inflationTrain.predict(tf.tensor2d(yearsScaled,[yearsScaled.length,1])).dataSync();
+        let broadMoneyPredict = broadMoneyTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let domesticPredict = domesticTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let foreignPredict = foreignTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let inflationPredict = inflationTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let stockPredict = stockTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let totalReservesPredict = totalReservesTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        let gdpPredict = gdpTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
 
+        // Converting the tensor objects back to arrays
+        let broadMoneyPredictScaled = Array.from(broadMoneyPredict);
+        let domesticPredctScaled = Array.from(domesticPredict);
+        let foreignPredictScaled = Array.from(foreignPredict);
+        let inflationPredictScaled = Array.from(inflationPredict);
+        let stockPredictScaled = Array.from(stockPredict);
+        let totalReservesPredictScaled = Array.from(totalReservesPredict);
+        let gdpPredictScaled = Array.from(gdpPredict);
 
+        // Ten Year Forecast
+        let tenYearBroadMoney = conversion(maxArray(broadMoneyGrowth), minArray(broadMoneyGrowth), broadMoneyPredictScaled);
+        let tenYearDomestic = conversion(maxArray(domesticCompanies), minArray(domesticCompanies), domesticPredctScaled);
+        let tenYearForeign = conversion(maxArray(foreignInvestment), minArray(foreignInvestment), foreignPredictScaled);
+        let tenYearInflation = conversion(maxArray(inflation), minArray(inflation), inflationPredictScaled);
+        let tenYearStock = conversion(maxArray(stockTrade), minArray(stockTrade), stockPredictScaled);
+        let tenYearReserves = conversion(maxArray(totalReserves), minArray(totalReserves), totalReservesPredictScaled);
+        let tenYearGdp = conversion(maxArray(gdp), minArray(gdp), gdpPredictScaled);
 
+        // console.log(`${tenYearBroadMoney} ${tenYearDomestic} ${tenYearForeign} ${tenYearInflation} ${tenYearStock} ${tenYearReserves} ${tenYearGdp}`);
 
+        // Creating a table to show the ML Predictions
+        var Broadlayout = {
+            title: `${id}`,
+            font: {
+                color: 'black',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var broadValues = [predYears, tenYearBroadMoney]
 
+        var broaddata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Broad Money Growth (%)</b>"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: broadValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
 
-
-
-        
-        
-
-
-
-
-
-
-
+        Plotly.newPlot('predbroadmoney', broaddata, Broadlayout);
 
     })
 }

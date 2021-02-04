@@ -1,6 +1,7 @@
 // Creating a link to the geojson file
 var link = 'static/countries.geojson'
 
+
 // Creating a map Object and zoomed out to show the world
 var myMap = L.map("healthmapid", {
   center: [-5.067383325760818, 77.08252432997061],
