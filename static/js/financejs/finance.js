@@ -10,7 +10,7 @@ async function financeUnPackData(id) {
 
         // Filtering by country
         let countryFilter = data.filter(nation => nation.country === id);
-        console.log(countryFilter);
+        // console.log(countryFilter);
 
         // Creating a list of empty arrays to later append
         let broadMoneyGrowth = [];
