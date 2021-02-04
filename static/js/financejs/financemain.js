@@ -103,12 +103,13 @@ d3.json(link).then(function (data) {
         d3.selectAll('#financedataplotly').html('');
         d3.selectAll('#financepredict').html('');
 
-
-
-
-
-
-
+        d3.selectAll('#broadmoney').html('');
+        d3.selectAll('#domesticcompanies').html('');
+        d3.selectAll('#gdp').html('');
+        d3.selectAll('#foreigninvestment').html('');
+        d3.selectAll('#inflation').html('');
+        d3.selectAll('#stockstraded').html('');
+        d3.selectAll('#totalreserves').html('');
 
 
 
