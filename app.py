@@ -38,7 +38,7 @@ compiled_data = []
 for l in results3:
     d = {"country":l[0],"country_code":l[1],"_year":l[2],"population":l[3],"gdp_current_usd":l[4],"total_cancer_cases":l[5],"total_cancer_deaths":l[6],"total_obesity_numbers":l[7],"birth_rate":l[8],"death_rate":l[9],"life_expectency":l[10],"dtp_immunisation":l[11],"measles_immunisation":l[12], "land_area_ha":l[13], 
     "agri_land_pct":l[14],"forest_area_pct":l[15],"cereal_yield_kg_ha":l[16],"cash_crop_yield_kg_ha":l[17],"employment_agri_pct":l[18], "livestock_production_100_index":l[19],"atm_per_100000":l[20], "borrowers_from_banks":l[21], "broad_money_growth_pct":l[22],"listed_domestic_companies":l[23],
-    "foreign_investment_gdp":l[24],"inflation_pct":l[25],"stocks_traded_pct_gdp":l[26], "total_reserves":l[27], "high_tech_export":l[28], "patent_applications":l[29],"science_publications":l[30],"technology_grants_current_usd":l[31]}
+    "foreign_investment_gdp":l[24],"inflation_pct":l[25],"stocks_traded_pct_gdp":l[26], "total_reserves":l[27], "pm2_5_air_pollution":l[28], "access_to_electricity_pct":l[29],"renewable_electricity_pct":l[30], "urban_population_pct":l[31],"electricity_consumption_kwh":l[32]}
     compiled_data.append(d)
 
 
@@ -68,9 +68,9 @@ def agriculture():
 def finance():
     return render_template("financesector.html")
 
-@app.route("/scitechsector")
-def scitech():
-    return render_template("scitechsector.html")
+@app.route("/environment")
+def environment():
+    return render_template("environment.html")
 
 
 @app.route("/compileddata", methods=["GET"])

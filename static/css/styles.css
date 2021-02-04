@@ -100,24 +100,24 @@
     font-weight: bolder;
 }
 
-.science {
-    background-image: url('images/scitech.jpg');
+.environment {
+    background-image: url('images/environment.jpg');
     background-size: cover;
     padding: 100px;
     text-align: center;
     border-radius: 25px;
 }
 
-.science a{
+.environment a{
     color: white;
     font-size: 30px;
 }
 
-.science a:link{
+.environment a:link{
     text-decoration: none;
 }
 
-.science a:hover{
+.environment a:hover{
     color: rgb(255, 148, 166);
     font-weight: bolder;
 }
