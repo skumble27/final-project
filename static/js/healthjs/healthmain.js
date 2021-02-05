@@ -22,23 +22,23 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 function chooseColor(continent) {
   switch (continent) {
     case "Asia":
-      return "yellow";
+      return "#008cff";
     case "South Asia":
-      return "orange";
+      return "#003cff";
     case "Central Asia":
-      return "grey";
+      return "#666bff";
     case "West Asia":
-      return "green";
+      return "#a3a6ff";
     case "North America":
       return "blue";
     case "South America":
-      return "purple";
+      return "#dbdcff";
     case "Oceania":
-      return "cyan";
+      return "#dbf7ff";
     case "Africa":
-      return "red";
+      return "#61d5ff";
     case "Europe":
-      return "pink";
+      return "#00729c";
     default:
       return "black";
   }

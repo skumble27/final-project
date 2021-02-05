@@ -1,12 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel='stylesheet' scr='text/css' href="{{url_for('static',filename = 'css/environmentstyles.css')}}">
+
+    <title>Environment Forecast</title>
+
 </head>
+
 <body>
-    <h1>Environment</h1>
-    
+
+
+    <div class="row">
+        <div class="navbarformat col-md-6">
+            <nav class="navbar-light">
+                <a href="{{url_for('index')}}">
+                    <img src='static/css/images/MLAnalytics.svg' width="200" height="50"
+                        class="d-inline-block align-top" alt="" loading="lazy">
+                </a>
+            </nav>
+        </div>
+        <div class="navbarformatright col-md-2">
+            <a href="{{url_for('agriculture')}}">Agriculture Sector</a>
+        </div>
+        <div class="navbarformatright col-md-2">
+            <a href="{{url_for('finance')}}">Finance Sector</a>
+        </div>
+        <div class="navbarformatright col-md-2">
+            <a href="{{url_for('healthcare')}}">Healthcare Sector</a>
+        </div>
+
+    </div>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Environment</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="environment col-md-12">
+                <h1>Overview</h1>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <div class='mapformat' id='environmentmapid'></div>
+            </div>
+        </div><br><br><br>
+        <div class="row">
+            <div id='environmentplotly' class="environment col-md-12">
+                <h1></h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Plotting the time series -->
+                <div id='p25airpoll'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='population'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='electricity'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='renewable'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='urbanpopulation'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='electricityconsumption'></div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div id='environmentpredict' class="environment col-md-12">
+                <h1></h1>
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Plotting the time series -->
+                <div id='predp25airpoll'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predpopulation'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predelectricity'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predrenewable'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predurbanpopulation'></div>
+            </div>
+            <div class="col-md-6">
+                <div id='predelectricityconsumption'></div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Sumukh Kumble, 2021</p>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Leaflet Library -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+
+    <!-- Tensorflow JS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+
+    <!-- D3 javascript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Plotly JavaScript Library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Custom JavaScript Libraries -->
+    <script src="{{url_for('static', filename='js/environmentjs/environmentpredict.js')}}"></script>
+    <script src="{{url_for('static', filename='js/config.js')}}"></script>
+    <script src="{{url_for('static', filename='js/mathsfunctions.js')}}"></script>
+    <script src="{{url_for('static', filename='js/environmentjs/environment.js')}}"></script>
+    <script src="{{url_for('static', filename='js/environmentjs/environmentmain.js')}}"></script>
+
+
+
+
+
+
+
 </body>
+
 </html>

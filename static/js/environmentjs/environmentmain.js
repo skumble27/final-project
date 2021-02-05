@@ -1,8 +1,9 @@
 // Creating a link to the geojson file
 var link = 'static/countries.geojson'
 
+
 // Creating a map Object and zoomed out to show the world
-var myMap = L.map("agrimapid", {
+var myMap = L.map("environmentmapid", {
   center: [-5.067383325760818, 77.08252432997061],
   zoom: 3
 });
@@ -21,23 +22,23 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 function chooseColor(continent) {
   switch (continent) {
     case "Asia":
-      return "yellow";
+      return "#d7ffe8";
     case "South Asia":
-      return "#ffbf00";
+      return "#66ffa7";
     case "Central Asia":
-      return "#ffe45c";
+      return "#00ff6c";
     case "West Asia":
-      return "#fff2b3";
+      return "green";
     case "North America":
-      return "#fdffde";
+      return "#5c7d14";
     case "South America":
-      return "#f5ff5c";
+      return "#00b04b";
     case "Oceania":
-      return "#efff00";
+      return "#006e2f";
     case "Africa":
-      return "#ffd470";
+      return "#004f22";
     case "Europe":
-      return "#de7f2c";
+      return "#147d6b";
     default:
       return "black";
   }
@@ -99,32 +100,33 @@ d3.json(link).then(function (data) {
   // This code will return the selected country in which to filter the data and display information that is related to that particular country.
   geoJson.on('click', function (e) {
     let chosenCountry = e.layer.feature.properties.ADMIN;
+
+    d3.selectAll('#environmentplotly').html('');
+    d3.selectAll('#environmentpredict').html('');
+
+    d3.selectAll('#p25airpoll').html('');
+    d3.selectAll('#population').html('');
+    d3.selectAll('#electricity').html('');
+    d3.selectAll('#renewable').html('');
+    d3.selectAll('#urbanpopulation').html('');
+    d3.selectAll('#electricityconsumption').html('');
+
+    d3.selectAll('#predp25airpoll').html('');
+    d3.selectAll('#predpopulation').html('');
+    d3.selectAll('#predelectricity').html('');
+    d3.selectAll('#predrenewable').html('');
+    d3.selectAll('#predurbanpopulation').html('');
+    d3.selectAll('#predelectricityconsumption').html('');
+
+
+
+    d3.selectAll('#environmentplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Environmental Data`);
+    d3.selectAll('#environmentpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
+
+
     console.log(chosenCountry);
+    environmentDataUnpack(chosenCountry);
 
-    d3.selectAll('#agridataplotly').html('');
-    d3.selectAll('#agripredict').html('');
-
-    d3.selectAll('#agriland').html('');
-    d3.selectAll('#forestland').html('');
-    d3.selectAll('#cereal').html('');
-    d3.selectAll('#cashcrop').html('');
-    d3.selectAll('#employmentag').html('');
-    d3.selectAll('#livestock').html('');
-
-    d3.selectAll('#predagri').html('');
-    d3.selectAll('#predfor').html('');
-    d3.selectAll('#predcereal').html('');
-    d3.selectAll('#predcash').html('');
-    d3.selectAll('#predemp').html('');
-    d3.selectAll('#predlive').html('');
-
-
-
-    d3.selectAll('#agridataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Agricultural Sector Data`);
-    d3.selectAll('#agripredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`)
-
-    agriDataUnpack(chosenCountry);
-    agriPredict(chosenCountry);
 
   })
 

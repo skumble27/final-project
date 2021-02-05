@@ -8,36 +8,36 @@ var myMap = L.map("financemapid", {
 });
 
 // Adding a base map tile layer
-L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-    tileSize: 512,
-    maxZoom: 18,
-    zoomOffset: -1,
-    id: "mapbox/light-v10",
-    accessToken: API_KEY
+var outdoorsMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/outdoors-v11",
+  accessToken: API_KEY
 }).addTo(myMap);
 
 // Creating a function that will highlight the colours of the continent for which country it belongs to
 function chooseColor(continent) {
     switch (continent) {
         case "Asia":
-            return "yellow";
+            return "#dbdbdb";
         case "South Asia":
-            return "orange";
+            return "#b0b0b0";
         case "Central Asia":
             return "grey";
         case "West Asia":
-            return "green";
+            return "#878787";
         case "North America":
-            return "blue";
+            return "#595959";
         case "South America":
-            return "purple";
+            return "#2e2e2";
         case "Oceania":
-            return "cyan";
+            return "#ffffff";
         case "Africa":
-            return "red";
+            return "#413f5";
         case "Europe":
-            return "pink";
+            return "black";
         default:
             return "black";
     }
@@ -111,6 +111,13 @@ d3.json(link).then(function (data) {
         d3.selectAll('#stockstraded').html('');
         d3.selectAll('#totalreserves').html('');
 
+        d3.selectAll('#predbroadmoney').html('');
+        d3.selectAll('#preddomesticcompanies').html('');
+        d3.selectAll('#predgdp').html('');
+        d3.selectAll('#predforeigninvestment').html('');
+        d3.selectAll('#predinflation').html('');
+        d3.selectAll('#predstockstraded').html('');
+        d3.selectAll('#predtotalreserves').html('');
 
 
         d3.selectAll('#financedataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Finance Sector Data`);

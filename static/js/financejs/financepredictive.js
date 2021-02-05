@@ -162,7 +162,7 @@ async function financePredict(id) {
         var Broadlayout = {
             title: `${id}`,
             font: {
-                color: 'black',
+                color: 'white',
                 family: 'Arial',
                 size: 16
             },
@@ -189,6 +189,195 @@ async function financePredict(id) {
         }]
 
         Plotly.newPlot('predbroadmoney', broaddata, Broadlayout);
+
+        var domesticCompanylayout = {
+            title: `${id}`,
+            font: {
+                color: 'white',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var domesticCompanyValues = [predYears, tenYearDomestic]
+
+        var domesticCompanydata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Number of Domestic Companies"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: domesticCompanyValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('preddomesticcompanies', domesticCompanydata, domesticCompanylayout);
+
+        var gdplayout = {
+            title: `${id}`,
+            font: {
+                color: 'white',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var gdpValues = [predYears, tenYearGdp]
+
+        var gdpdata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Gross Domestic Product"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: gdpValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predgdp', gdpdata, gdplayout);
+
+        var foreignInvestlayout = {
+            title: `${id}`,
+            font: {
+                color: 'white',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var foreignValues = [predYears, tenYearForeign]
+
+        var foreigndata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Foreign Investment (% GDP)"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: foreignValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predforeigninvestment', foreigndata, foreignInvestlayout);
+
+        var inflationlayout = {
+            title: `${id}`,
+            font: {
+                color: 'white',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var inflationValues = [predYears, tenYearForeign]
+
+        var inflationdata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Inflation"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: inflationValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predinflation', inflationdata, inflationlayout);
+
+        var stockslayout = {
+            title: `${id}`,
+            font: {
+                color: 'white',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var stocksValues = [predYears, tenYearStock]
+
+        var stockdata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Stocks Traded (% of GDP)"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: stocksValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predstockstraded', stockdata, stockslayout);
+
+        var reserveslayout = {
+            title: `${id}`,
+            font: {
+                color: 'white',
+                family: 'Arial',
+                size: 16
+            },
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
+        };
+        var reservesValues = [predYears, tenYearReserves]
+
+        var reservesdata = [{
+            type: 'table',
+            header: {
+                values: [["<b>Year</b>"], ["<b>Total Reserves (USD)"]],
+                align: "center",
+                line: { width: 1, color: 'black' },
+                fill: { color: "#595959" },
+                font: { family: "Arial", size: 12, color: "white" }
+            },
+            cells: {
+                values: reservesValues,
+                align: "center",
+                line: { color: "black", width: 1 },
+                font: { family: "Arial", size: 11, color: ["black"] }
+            }
+        }]
+
+        Plotly.newPlot('predtotalreserves', reservesdata, reserveslayout);
+
+        
+
 
     })
 }
