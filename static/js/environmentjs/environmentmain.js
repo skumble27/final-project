@@ -126,6 +126,7 @@ d3.json(link).then(function (data) {
 
     console.log(chosenCountry);
     environmentDataUnpack(chosenCountry);
+    environmentPredict(chosenCountry);
 
 
   })
