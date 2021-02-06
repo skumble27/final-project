@@ -67,25 +67,31 @@ async function agriPredict(id) {
         const gdpTrain = tf.sequential();
         const livestockTrain = tf.sequential();
 
-        // Converting JavaScript arrays to Tensorflow Arrays
-        let agriTF = tf.tensor2d(MinMaxScaler(agriLand), [agriLand.length, 1]);
-        let forestTF = tf.tensor2d(MinMaxScaler(forestLand), [forestLand.length, 1]);
-        let cerealTF = tf.tensor2d(MinMaxScaler(cerealYield), [cerealYield.length, 1]);
-        let cashCropTF = tf.tensor2d(MinMaxScaler(cashCropYield), [cashCropYield.length, 1]);
-        let empTF = tf.tensor2d(MinMaxScaler(employmentAg), [employmentAg.length, 1]);
-        let populationTF = tf.tensor2d(MinMaxScaler(population), [population.length, 1]);
-        let gdpTF = tf.tensor2d(MinMaxScaler(gdp), [gdp.length, 1]);
-        let livestockTF = tf.tensor2d(MinMaxScaler(liveStockProd), [liveStockProd.length, 1]);
-        let yearTF = tf.tensor2d(MinMaxScaler(intYear), [intYear.length, 1]);
-
         // Creating a 10 year forecast
         let predYears = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
-        // Scaling the years for predictive analytics
-        let yearsScaled = yearScale(predYears);
+        let testYears = [2015, 2016, 2017, 2018, 2019, 2020];
+
+        // Converting JavaScript arrays to Tensorflow Arrays
+        let agriTF = tf.tensor2d(MinMaxScaler(agriLand.slice(-6)), [agriLand.slice(-6).length, 1]);
+        let forestTF = tf.tensor2d(MinMaxScaler(forestLand.slice(-6)), [forestLand.slice(-6).length, 1]);
+        let cerealTF = tf.tensor2d(MinMaxScaler(cerealYield.slice(-6)), [cerealYield.slice(-6).length, 1]);
+        let cashCropTF = tf.tensor2d(MinMaxScaler(cashCropYield.slice(-6)), [cashCropYield.slice(-6).length, 1]);
+        let empTF = tf.tensor2d(MinMaxScaler(employmentAg.slice(-6)), [employmentAg.slice(-6).length, 1]);
+        let populationTF = tf.tensor2d(MinMaxScaler(population.slice(-6)), [population.slice(-6).length, 1]);
+        let gdpTF = tf.tensor2d(MinMaxScaler(gdp.slice(-6)), [gdp.slice(-6).length, 1]);
+        let livestockTF = tf.tensor2d(MinMaxScaler(liveStockProd.slice(-6)), [liveStockProd.slice(-6).length, 1]);
+        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
+
+        
+        // Scaling the predictive years
+        let testYearsScaled = yearScale(testYears);
+        let predYearsScaled = yearScale(predYears);
+        
+        console.log(testYearsScaled);
+        console.log(predYearsScaled);
 
 
-
-        d3.selectAll('#agripredict').append('h3').text("Machine Learning in progress");
+        d3.selectAll('#agripredict').append('h2').text("Machine Learning in progress");
 
         // Creating the Neural Networks for Each Variable
         agriTrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
@@ -140,36 +146,75 @@ async function agriPredict(id) {
         await livestockTrain.fit(yearTF, livestockTF, { epochs: 100 });
 
         // Announce that training is complete
-        d3.selectAll('#agripredict').append('p').text("Machine Learning Complete, forecasts are available below");
+        d3.selectAll('#agripredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
 
-        let agriPredict = await agriTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let forestPredict = await foresrTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let cerealPredict = await cerealTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let cashPredict = await cashCropTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let empPredict = await employmentTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let populationPredict = await populationTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let gdpPredict = await gdpTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
-        let livestockpredict = await livestockTrain.predict(tf.tensor2d(yearsScaled, [yearsScaled.length, 1])).dataSync();
+        // Test Accuracy of the predictions
+        let agriTest = await agriTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let forestTest = await foresrTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let cerealTest = await cerealTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let cashTest = await cashCropTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let empTest = await employmentTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let populationTest = await populationTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let gdpTest = await gdpTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+        let livestockTest = await livestockTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
+
+        // Predict the next ten years
+        let agriPredict = await agriTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let forestPredict = await foresrTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let cerealPredict = await cerealTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let cashPredict = await cashCropTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let empPredict = await employmentTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let populationPredict = await populationTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let gdpPredict = await gdpTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
+        let livestockpredict = await livestockTrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
 
         // Converting tensor objects back to arrays
         let agriPredScaled = Array.from(agriPredict);
+        let agriTestScaled = Array.from(agriTest);
         let forPredScaled = Array.from(forestPredict);
+        let forTestScaled = Array.from(forestTest);
         let cerealPredScaled = Array.from(cerealPredict);
+        let cerealTestScaled = Array.from(cerealTest);
         let cashPredScaled = Array.from(cashPredict);
+        let cashTestScaled = Array.from(cashTest);
         let empPredScaled = Array.from(empPredict);
+        let empTestScaled = Array.from(empTest);
         let popPredScaled = Array.from(populationPredict);
+        let popTestScaled = Array.from(populationTest);
         let gdpPredScaled = Array.from(gdpPredict);
+        let gdpTestScaled = Array.from(gdpTest);
         let livePredScaled = Array.from(livestockpredict);
+        let liveTestScaled = Array.from(livestockTest);
 
         // Rescaling the data back to their original values
         let tenYearAgri = conversion(maxArray(agriLand), minArray(agriLand), agriPredScaled);
+        let tenYearAgriTest = conversion(maxArray(agriLand), minArray(agriLand), agriTestScaled);
         let tenYearfor = conversion(maxArray(forestLand), minArray(forestLand), forPredScaled);
+        let tenYearforTest = conversion(maxArray(forestLand), minArray(forestLand), forTestScaled); 
         let tenYearCereal = conversion(maxArray(cerealYield), minArray(cerealYield), cerealPredScaled);
+        let tenYearCerealTest = conversion(maxArray(cerealYield), minArray(cerealYield), cerealTestScaled);
         let tenYearCash = conversion(maxArray(cashCropYield), minArray(cashCropYield), cashPredScaled);
+        let tenYearCashTest = conversion(maxArray(cashCropYield), minArray(cashCropYield), cashTestScaled);
         let tenYearEmp = conversion(maxArray(employmentAg), minArray(employmentAg), empPredScaled);
+        let tenYearEmpTest = conversion(maxArray(employmentAg), minArray(employmentAg), empTestScaled);      
         let tenYearPop = conversion(maxArray(population), minArray(population), popPredScaled);
+        let tenYearPopTest = conversion(maxArray(population), minArray(population), popTestScaled);
         let tenYearGdp = conversion(maxArray(gdp), minArray(gdp), gdpPredScaled);
+        let tenYearGdpTest = conversion(maxArray(gdp), minArray(gdp), gdpTestScaled);
         let tenYearLive = conversion(maxArray(liveStockProd), minArray(liveStockProd), livePredScaled);
+        let tenYearLiveTest = conversion(maxArray(liveStockProd), minArray(liveStockProd), liveTestScaled);
+
+        // Inform the user that training is complete
+
+        d3.selectAll('#agripredict').append('p').text("Machine Learning Complete, forecasts are available below");
+
+        d3.selectAll('#agritag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(agriLand.slice(-6),tenYearAgriTest))}%`);
+        d3.selectAll('#fortag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(forestLand.slice(-6),tenYearforTest))}%`);
+        d3.selectAll('#cerealtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cerealYield.slice(-6),tenYearCerealTest))}%`);
+        d3.selectAll('#cashcroptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cashCropYield.slice(-6),tenYearCashTest))}%`);
+        d3.selectAll('#emptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(employmentAg.slice(-6),tenYearEmpTest))}%`);
+        d3.selectAll('#livestocktag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(liveStockProd.slice(-6),tenYearLiveTest))}%`);
+
 
         // Creating Plots to compare the forecast between different parameters
         var agrlayout = {
@@ -201,7 +246,7 @@ async function agriPredict(id) {
             }
 
         }]
-        
+
 
         Plotly.newPlot('predagri', agridata, agrlayout);
 

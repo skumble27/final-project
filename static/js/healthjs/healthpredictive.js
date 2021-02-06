@@ -81,7 +81,7 @@ async function healthPredict(id) {
 
         // Converting Arrays to Tensorflow arrays
         let brithRateTF = tf.tensor2d(MinMaxScaler(brithRate.slice(-6)), [brithRate.slice(-6).length, 1]);
-        yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
+        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
         let deathRateTF = tf.tensor2d(MinMaxScaler(deathRate.slice(-6)), [deathRate.slice(-6).length, 1]);
         let dtpRateTF = tf.tensor2d(MinMaxScaler(dtpImmunisation.slice(-6)), [dtpImmunisation.slice(-6).length, 1]);
         let lifeRateTF = tf.tensor2d(MinMaxScaler(lifeExpectency.slice(-6)), [lifeExpectency.slice(-6).length, 1]);

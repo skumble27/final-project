@@ -66,11 +66,11 @@ d3.json(link).then(function (data) {
       };
     },
 
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
 
       layer.on({
         // The opacity will change when the mouse hovers over a specific polygon
-        mouseover: function(event){
+        mouseover: function (event) {
           layer = event.target;
           layer.setStyle({
             fillOpacity: 0.9
@@ -78,14 +78,14 @@ d3.json(link).then(function (data) {
         },
 
         // The opacity will return to default values when the mouse is removed from the polygon
-        mouseout: function(event){
+        mouseout: function (event) {
           layer = event.target;
           layer.setStyle({
             fillOpacity: 0.5
           });
         },
         // This event will zoom into the polygon when clicked
-        click: function(event) {
+        click: function (event) {
           myMap.fitBounds(event.target.getBounds());
         }
       });
@@ -117,6 +117,13 @@ d3.json(link).then(function (data) {
     d3.selectAll('#predcash').html('');
     d3.selectAll('#predemp').html('');
     d3.selectAll('#predlive').html('');
+
+    d3.selectAll('#agritag').html('');
+    d3.selectAll('#fortag').html('');
+    d3.selectAll('#cerealtag').html('');
+    d3.selectAll('#cashcroptag').html('');
+    d3.selectAll('#emptag').html('');
+    d3.selectAll('#livestocktag').html('');
 
 
 
