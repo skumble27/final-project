@@ -99,7 +99,7 @@ async function healthPredict(id) {
         console.log(testYearsScaled);
         console.log(predYearsScaled);
 
-        d3.selectAll('#healthpredict').append('h3').text("Machine Learning in progress");
+        d3.selectAll('#healthpredict').append('h2').text("Machine Learning in progress");
 
         // Creating the Neural Networks
         birthtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
@@ -165,8 +165,8 @@ async function healthPredict(id) {
         await populationtrain.fit(yearTF, populationRateTF, {epochs:100});
         await gdptrain.fit(yearTF, gdpRateTF, {epochs:100});
 
-        // Inform User that Training is Complete
-        d3.selectAll('#healthpredict').append('p').text("Machine Learning Complete, forecasts are available below");
+        d3.selectAll('#healthpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
+
 
         // Test the accuracy of the predictions
         let birthTest = await birthtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
@@ -238,6 +238,8 @@ async function healthPredict(id) {
         let tenYeargdp = conversion(maxArray(gdp), minArray(gdp), gdppredictConvert);
         let tenYeargdpTest = conversion(maxArray(gdp), minArray(gdp), gdpConvert);
 
+        // Inform User that Training is Complete
+        d3.selectAll('#healthpredict').append('p').text("Machine Learning Complete, forecasts are available below");
 
         d3.selectAll('#birthtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(-6),tenYearBirthTest))}%`);
         d3.selectAll('#deathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(deathRate.slice(-6),tenYearDeathTest))}%`);
