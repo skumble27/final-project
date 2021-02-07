@@ -9,12 +9,12 @@ var myMap = L.map("financemapid", {
 
 // Adding a base map tile layer
 var outdoorsMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-  tileSize: 512,
-  maxZoom: 18,
-  zoomOffset: -1,
-  id: "mapbox/outdoors-v11",
-  accessToken: API_KEY
+    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+    tileSize: 512,
+    maxZoom: 18,
+    zoomOffset: -1,
+    id: "mapbox/outdoors-v11",
+    accessToken: API_KEY
 }).addTo(myMap);
 
 // Creating a function that will highlight the colours of the continent for which country it belongs to
@@ -118,6 +118,14 @@ d3.json(link).then(function (data) {
         d3.selectAll('#predinflation').html('');
         d3.selectAll('#predstockstraded').html('');
         d3.selectAll('#predtotalreserves').html('');
+
+        d3.selectAll('#broadmoneytag').html('');
+        d3.selectAll('#domesticcomptag').html('');
+        d3.selectAll('#gdptag').html('');
+        d3.selectAll('#foreigntag').html('');
+        d3.selectAll('#inflationtag').html('');
+        d3.selectAll('#stockstag').html('');
+        d3.selectAll('#cashreservestag').html('');
 
 
         d3.selectAll('#financedataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Finance Sector Data`);

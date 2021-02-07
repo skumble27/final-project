@@ -60,7 +60,7 @@
 }
 
 
-.finance h1, h3, p {
+.finance h1, h2, h3, p {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     font-weight: bolder;
@@ -68,6 +68,19 @@
 
 .finance h1 {
     color: white;
+}
+
+.finance h2 {
+    color: pink;
+    font-size: 24px;
+}
+
+.finance h3 {
+    color: red;
+}
+
+.finance p{
+    color: rgb(147, 255, 143);
 }
 
 hr{
@@ -104,4 +117,14 @@ hr{
 
 body{
     background-color: black;
+}
+
+p {
+    color: white;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
