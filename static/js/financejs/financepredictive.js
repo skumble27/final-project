@@ -77,7 +77,7 @@ async function financePredict(id) {
         // Scaling the predictive years
         let testYearsScaled = yearScale(testYears);
         let predYearsScaled = yearScale(predYears);
-        
+
         console.log(testYearsScaled);
         console.log(predYearsScaled);
 
@@ -128,7 +128,7 @@ async function financePredict(id) {
         await totalReservesTrain.fit(yearTF, totalReserveTF, { epochs: 100 });
         await gdpTrain.fit(yearTF, gdpTF, { epochs: 100 });
 
-        
+
 
         d3.selectAll('#financepredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
 
@@ -186,19 +186,19 @@ async function financePredict(id) {
         let tenYearReservesTest = conversion(maxArray(totalReserves), minArray(totalReserves), totalReservesTestScaled);
         let tenYearGdpTest = conversion(maxArray(gdp), minArray(gdp), gdpTestScaled);
 
-         // Inform User that Training is Complete
-         d3.selectAll('#financepredict').append('p').text("Machine Learning Complete, forecasts are available below");
+        // Inform User that Training is Complete
+        d3.selectAll('#financepredict').append('p').text("Machine Learning Complete, forecasts are available below");
 
-         d3.selectAll('#broadmoneytag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(broadMoneyGrowth.slice(-6),tenYearBroadMoneyTest))}%`);
-         d3.selectAll('#domesticcomptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(domesticCompanies.slice(-6),tenYearDomesticTest))}%`);
-         d3.selectAll('#gdptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(gdp.slice(-6),tenYearGdpTest))}%`);
-         d3.selectAll('#foreigntag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(foreignInvestment.slice(-6),tenYearForeignTest))}%`);
-         d3.selectAll('#inflationtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(inflation.slice(-6),tenYearInflationTest))}%`);
-         d3.selectAll('#stockstag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(stockTrade.slice(-6),tenYearStockTest))}%`);
-         d3.selectAll('#cashreservetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(totalReserves.slice(-6),tenYearReservesTest))}%`);
+        d3.selectAll('#broadmoneytag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(broadMoneyGrowth.slice(-6), tenYearBroadMoneyTest))}%`);
+        d3.selectAll('#domesticcomptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(domesticCompanies.slice(-6), tenYearDomesticTest))}%`);
+        d3.selectAll('#gdptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(gdp.slice(-6), tenYearGdpTest))}%`);
+        d3.selectAll('#foreigntag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(foreignInvestment.slice(-6), tenYearForeignTest))}%`);
+        d3.selectAll('#inflationtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(inflation.slice(-6), tenYearInflationTest))}%`);
+        d3.selectAll('#stockstag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(stockTrade.slice(-6), tenYearStockTest))}%`);
+        d3.selectAll('#cashreservetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(totalReserves.slice(-6), tenYearReservesTest))}%`);
 
 
-        
+
 
         // Creating a table to show the ML Predictions
         var Broadlayout = {
@@ -417,9 +417,6 @@ async function financePredict(id) {
         }]
 
         Plotly.newPlot('predtotalreserves', reservesdata, reserveslayout);
-
-
-
 
     })
 }

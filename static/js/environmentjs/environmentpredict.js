@@ -63,26 +63,26 @@ async function environmentPredict(id) {
         let testYears = [2015, 2016, 2017, 2018, 2019, 2020];
 
         // Converting the arrays to tensorflow arrays
-        let p25airpolTF = tf.tensor2d(MinMaxScaler(p25airpol.slice(-6)), [p25airpol.slice(-6).length,1]);
-        let populationTF = tf.tensor2d(MinMaxScaler(population.slice(-6)), [population.slice(-6).length,1]);
-        let electricAccessTF = tf.tensor2d(MinMaxScaler(electricityacess.slice(-6)), [electricityacess.slice(-6).length,1]);
-        let renewableTF = tf.tensor2d(MinMaxScaler(renewable.slice(-6)),[renewable.slice(-6).length,1]);
-        let urbanpopTF = tf.tensor2d(MinMaxScaler(urbanpop.slice(-6)),[urbanpop.slice(-6).length,1]);
-        let electricityUseTF = tf.tensor2d(MinMaxScaler(electricUse.slice(-6)),[electricUse.slice(-6).length,1]);
-        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)),[intYear.slice(-6).length,1]);
+        let p25airpolTF = tf.tensor2d(MinMaxScaler(p25airpol.slice(-6)), [p25airpol.slice(-6).length, 1]);
+        let populationTF = tf.tensor2d(MinMaxScaler(population.slice(-6)), [population.slice(-6).length, 1]);
+        let electricAccessTF = tf.tensor2d(MinMaxScaler(electricityacess.slice(-6)), [electricityacess.slice(-6).length, 1]);
+        let renewableTF = tf.tensor2d(MinMaxScaler(renewable.slice(-6)), [renewable.slice(-6).length, 1]);
+        let urbanpopTF = tf.tensor2d(MinMaxScaler(urbanpop.slice(-6)), [urbanpop.slice(-6).length, 1]);
+        let electricityUseTF = tf.tensor2d(MinMaxScaler(electricUse.slice(-6)), [electricUse.slice(-6).length, 1]);
+        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
 
         // Scaling the predictive years
         // Scaling the predictive years
         let testYearsScaled = yearScale(testYears);
         let predYearsScaled = yearScale(predYears);
-        
+
         console.log(testYearsScaled);
         console.log(predYearsScaled);
 
         d3.selectAll('#environmentpredict').append('h2').text("Machine Learning in progress");
 
         // Creating the Neural Networks to train on the tensorflow arrays
-        
+
         p25airpolTrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
         p25airpolTrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
         p25airpolTrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
@@ -114,12 +114,12 @@ async function environmentPredict(id) {
         electricUseTrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
         // Fitting the model to the Tensorflow 2d arrays
-        await p25airpolTrain.fit(yearTF, p25airpolTF, {epochs:100});
-        await populationTrain.fit(yearTF, populationTF, {epochs:100});
-        await electricityAccessTrain.fit(yearTF, electricAccessTF, {epochs:100});
-        await renewableTrain.fit(yearTF, renewableTF, {epochs:100});
-        await urbanPopTrain.fit(yearTF, urbanpopTF, {epochs:100});
-        await electricUseTrain.fit(yearTF, electricityUseTF, {epochs:100});
+        await p25airpolTrain.fit(yearTF, p25airpolTF, { epochs: 100 });
+        await populationTrain.fit(yearTF, populationTF, { epochs: 100 });
+        await electricityAccessTrain.fit(yearTF, electricAccessTF, { epochs: 100 });
+        await renewableTrain.fit(yearTF, renewableTF, { epochs: 100 });
+        await urbanPopTrain.fit(yearTF, urbanpopTF, { epochs: 100 });
+        await electricUseTrain.fit(yearTF, electricityUseTF, { epochs: 100 });
 
         d3.selectAll('#environmentpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
 
@@ -172,12 +172,12 @@ async function environmentPredict(id) {
         // Inform User that Training is Complete
         d3.selectAll('#environmentpredict').append('p').text("Machine Learning Complete, forecasts are available below");
 
-        d3.selectAll('#airpoltag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(p25airpol.slice(-6),tenYearp25airpolTest))}%`);
-        d3.selectAll('#poptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(-6),tenYearPopulationTest))}%`);
-        d3.selectAll('#electrictag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(electricityacess.slice(-6),tenYearElectricityAccessTest))}%`);
-        d3.selectAll('#renewabletag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(renewable.slice(-6),tenYearRenewableTest))}%`);
-        d3.selectAll('#urbanpoptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(urbanpop.slice(-6),tenYearurbanPopTest))}%`);
-        d3.selectAll('#electricusetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(electricUse.slice(-6),tenYearelectricUseTest))}%`);
+        d3.selectAll('#airpoltag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(p25airpol.slice(-6), tenYearp25airpolTest))}%`);
+        d3.selectAll('#poptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(-6), tenYearPopulationTest))}%`);
+        d3.selectAll('#electrictag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(electricityacess.slice(-6), tenYearElectricityAccessTest))}%`);
+        d3.selectAll('#renewabletag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(renewable.slice(-6), tenYearRenewableTest))}%`);
+        d3.selectAll('#urbanpoptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(urbanpop.slice(-6), tenYearurbanPopTest))}%`);
+        d3.selectAll('#electricusetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(electricUse.slice(-6), tenYearelectricUseTest))}%`);
 
         // Creating a plot and table
         var layout = {
@@ -316,32 +316,6 @@ async function environmentPredict(id) {
         }]
 
         Plotly.newPlot('predelectricityconsumption', electricityuseData, layout);
-        
-        
-        
-
-        
-        
-        
-        
-        
-
-        
-
-        
-
-
-
-
-
-
-
-
-
 
     })
-
-
-
-
 }

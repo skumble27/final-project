@@ -95,7 +95,7 @@ async function healthPredict(id) {
         // Scaling the predictive years
         let testYearsScaled = yearScale(testYears);
         let predYearsScaled = yearScale(predYears);
-        
+
         console.log(testYearsScaled);
         console.log(predYearsScaled);
 
@@ -154,16 +154,16 @@ async function healthPredict(id) {
 
 
         // Fitting the model to the data
-        await birthtrain.fit(yearTF, brithRateTF, {epochs:100});
-        await deathtrain.fit(yearTF, deathRateTF, {epochs:100});
-        await dtptrain.fit(yearTF, dtpRateTF, {epochs:100});
-        await lifetrain.fit(yearTF, lifeRateTF, {epochs:100});
-        await measlestrain.fit(yearTF, measlesImmRateTF, {epochs:100});
-        await cancercasetrain.fit(yearTF, cancerRateTF, {epochs:100});
-        await cancerdeathtrain.fit(yearTF, cancerdeathRateTF, {epochs:100});
-        await obesitytrain.fit(yearTF, obesityRateTF, {epochs:100});
-        await populationtrain.fit(yearTF, populationRateTF, {epochs:100});
-        await gdptrain.fit(yearTF, gdpRateTF, {epochs:100});
+        await birthtrain.fit(yearTF, brithRateTF, { epochs: 100 });
+        await deathtrain.fit(yearTF, deathRateTF, { epochs: 100 });
+        await dtptrain.fit(yearTF, dtpRateTF, { epochs: 100 });
+        await lifetrain.fit(yearTF, lifeRateTF, { epochs: 100 });
+        await measlestrain.fit(yearTF, measlesImmRateTF, { epochs: 100 });
+        await cancercasetrain.fit(yearTF, cancerRateTF, { epochs: 100 });
+        await cancerdeathtrain.fit(yearTF, cancerdeathRateTF, { epochs: 100 });
+        await obesitytrain.fit(yearTF, obesityRateTF, { epochs: 100 });
+        await populationtrain.fit(yearTF, populationRateTF, { epochs: 100 });
+        await gdptrain.fit(yearTF, gdpRateTF, { epochs: 100 });
 
         d3.selectAll('#healthpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
 
@@ -191,7 +191,7 @@ async function healthPredict(id) {
         let obesitypredict = await obesitytrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
         let populationpredict = await populationtrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
         let gdppredict = await gdptrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        
+
 
         // Converting Float Array back to regular array
         let birthtestConvert = Array.from(birthTest);
@@ -241,17 +241,17 @@ async function healthPredict(id) {
         // Inform User that Training is Complete
         d3.selectAll('#healthpredict').append('p').text("Machine Learning Complete, forecasts are available below");
 
-        d3.selectAll('#birthtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(-6),tenYearBirthTest))}%`);
-        d3.selectAll('#deathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(deathRate.slice(-6),tenYearDeathTest))}%`);
-        d3.selectAll('#dtptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(dtpImmunisation.slice(-6),tenYeardtpTest))}%`);
-        d3.selectAll('#lifetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(lifeExpectency.slice(-6),tenYearlifeTest))}%`);
-        d3.selectAll('#measlestag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(measlesImmunisation.slice(-6),tenYearmeaslesImmTest))}%`);
-        d3.selectAll('#cancercasetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerCases.slice(-6),tenYearCancerCaseTest))}%`);
-        d3.selectAll('#cancerdeathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerDeaths.slice(-6),tenYearCancerDeathsTest))}%`);
-        d3.selectAll('#obesitytag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(obesity.slice(-6),tenYearObesityTest))}%`);
-        d3.selectAll('#populationtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(-6),tenYearpopulationTest))}%`);
-        d3.selectAll('#gdptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(gdp.slice(-6),tenYeargdpTest))}%`);
-        
+        d3.selectAll('#birthtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(-6), tenYearBirthTest))}%`);
+        d3.selectAll('#deathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(deathRate.slice(-6), tenYearDeathTest))}%`);
+        d3.selectAll('#dtptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(dtpImmunisation.slice(-6), tenYeardtpTest))}%`);
+        d3.selectAll('#lifetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(lifeExpectency.slice(-6), tenYearlifeTest))}%`);
+        d3.selectAll('#measlestag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(measlesImmunisation.slice(-6), tenYearmeaslesImmTest))}%`);
+        d3.selectAll('#cancercasetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerCases.slice(-6), tenYearCancerCaseTest))}%`);
+        d3.selectAll('#cancerdeathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerDeaths.slice(-6), tenYearCancerDeathsTest))}%`);
+        d3.selectAll('#obesitytag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(obesity.slice(-6), tenYearObesityTest))}%`);
+        d3.selectAll('#populationtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(-6), tenYearpopulationTest))}%`);
+        d3.selectAll('#gdptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(gdp.slice(-6), tenYeargdpTest))}%`);
+
         // console.log(mean(PerCentErrordif(brithRate.slice(-6),tenYearBirthTest)));
 
         // Creating a plot and table
@@ -265,7 +265,7 @@ async function healthPredict(id) {
             paper_bgcolor: '#fffafb',
             plot_bgcolor: '#fffafb'
         };
-        var birthValues = [predYears,tenYearBirth]
+        var birthValues = [predYears, tenYearBirth]
 
         var birthdata = [{
             type: 'table',
@@ -286,7 +286,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predtotalbirths', birthdata, layout);
 
-        var deathValues = [predYears,tenYearDeath]
+        var deathValues = [predYears, tenYearDeath]
 
         var deathdata = [{
             type: 'table',
@@ -307,7 +307,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predtotaldeaths', deathdata, layout);
 
-        var dtpValues = [predYears,tenYeardtp]
+        var dtpValues = [predYears, tenYeardtp]
 
         var dtpdata = [{
             type: 'table',
@@ -328,7 +328,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('preddtp', dtpdata, layout);
 
-        var lifeValues = [predYears,tenYearlife]
+        var lifeValues = [predYears, tenYearlife]
 
         var lifedata = [{
             type: 'table',
@@ -349,7 +349,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predlife', lifedata, layout);
 
-        var measlesValues = [predYears,tenYearmeaslesImm]
+        var measlesValues = [predYears, tenYearmeaslesImm]
 
         var measlesdata = [{
             type: 'table',
@@ -370,7 +370,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predmeasles', measlesdata, layout);
 
-        var cancerCaseValues = [predYears,tenYearCancerCase]
+        var cancerCaseValues = [predYears, tenYearCancerCase]
 
         var CancerCasedata = [{
             type: 'table',
@@ -391,7 +391,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predcancercases', CancerCasedata, layout);
 
-        var CancerDeathValues = [predYears,tenYearCancerDeaths]
+        var CancerDeathValues = [predYears, tenYearCancerDeaths]
 
         var CancerDeathdata = [{
             type: 'table',
@@ -412,7 +412,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predcancerdeaths', CancerDeathdata, layout);
 
-        var ObesityValues = [predYears,tenYearObesity]
+        var ObesityValues = [predYears, tenYearObesity]
 
         var ObesityData = [{
             type: 'table',
@@ -433,7 +433,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predobesity', ObesityData, layout);
 
-        var PopulationValues = [predYears,tenYearPopulation]
+        var PopulationValues = [predYears, tenYearPopulation]
 
         var PopulationData = [{
             type: 'table',
@@ -454,7 +454,7 @@ async function healthPredict(id) {
 
         Plotly.newPlot('predpopulation', PopulationData, layout);
 
-        var gdpValues = [predYears,tenYeargdp]
+        var gdpValues = [predYears, tenYeargdp]
 
         var gdpData = [{
             type: 'table',
@@ -474,43 +474,6 @@ async function healthPredict(id) {
         }]
 
         Plotly.newPlot('predgdp', gdpData, layout);
-
-        
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     })
 }

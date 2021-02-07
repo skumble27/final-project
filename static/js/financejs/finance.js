@@ -225,7 +225,7 @@ async function financeUnPackData(id) {
             paper_bgcolor: 'black',
             plot_bgcolor: 'black'
         };
-        
+
         Plotly.newPlot('gdp', gdpData, gdpLayout);
 
 
@@ -378,18 +378,5 @@ async function financeUnPackData(id) {
             plot_bgcolor: 'black'
         };
         Plotly.newPlot('totalreserves', totalreservesData, totalreservesLayout);
-
-        
-
-        
-
-
-
-
-
-
-
     })
-
-
 }

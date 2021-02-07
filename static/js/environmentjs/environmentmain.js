@@ -67,11 +67,11 @@ d3.json(link).then(function (data) {
       };
     },
 
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
 
       layer.on({
         // The opacity will change when the mouse hovers over a specific polygon
-        mouseover: function(event){
+        mouseover: function (event) {
           layer = event.target;
           layer.setStyle({
             fillOpacity: 0.9
@@ -79,14 +79,14 @@ d3.json(link).then(function (data) {
         },
 
         // The opacity will return to default values when the mouse is removed from the polygon
-        mouseout: function(event){
+        mouseout: function (event) {
           layer = event.target;
           layer.setStyle({
             fillOpacity: 0.5
           });
         },
         // This event will zoom into the polygon when clicked
-        click: function(event) {
+        click: function (event) {
           myMap.fitBounds(event.target.getBounds());
         }
       });

@@ -82,11 +82,11 @@ async function agriPredict(id) {
         let livestockTF = tf.tensor2d(MinMaxScaler(liveStockProd.slice(-6)), [liveStockProd.slice(-6).length, 1]);
         let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
 
-        
+
         // Scaling the predictive years
         let testYearsScaled = yearScale(testYears);
         let predYearsScaled = yearScale(predYears);
-        
+
         console.log(testYearsScaled);
         console.log(predYearsScaled);
 
@@ -190,13 +190,13 @@ async function agriPredict(id) {
         let tenYearAgri = conversion(maxArray(agriLand), minArray(agriLand), agriPredScaled);
         let tenYearAgriTest = conversion(maxArray(agriLand), minArray(agriLand), agriTestScaled);
         let tenYearfor = conversion(maxArray(forestLand), minArray(forestLand), forPredScaled);
-        let tenYearforTest = conversion(maxArray(forestLand), minArray(forestLand), forTestScaled); 
+        let tenYearforTest = conversion(maxArray(forestLand), minArray(forestLand), forTestScaled);
         let tenYearCereal = conversion(maxArray(cerealYield), minArray(cerealYield), cerealPredScaled);
         let tenYearCerealTest = conversion(maxArray(cerealYield), minArray(cerealYield), cerealTestScaled);
         let tenYearCash = conversion(maxArray(cashCropYield), minArray(cashCropYield), cashPredScaled);
         let tenYearCashTest = conversion(maxArray(cashCropYield), minArray(cashCropYield), cashTestScaled);
         let tenYearEmp = conversion(maxArray(employmentAg), minArray(employmentAg), empPredScaled);
-        let tenYearEmpTest = conversion(maxArray(employmentAg), minArray(employmentAg), empTestScaled);      
+        let tenYearEmpTest = conversion(maxArray(employmentAg), minArray(employmentAg), empTestScaled);
         let tenYearPop = conversion(maxArray(population), minArray(population), popPredScaled);
         let tenYearPopTest = conversion(maxArray(population), minArray(population), popTestScaled);
         let tenYearGdp = conversion(maxArray(gdp), minArray(gdp), gdpPredScaled);
@@ -208,12 +208,12 @@ async function agriPredict(id) {
 
         d3.selectAll('#agripredict').append('p').text("Machine Learning Complete, forecasts are available below");
 
-        d3.selectAll('#agritag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(agriLand.slice(-6),tenYearAgriTest))}%`);
-        d3.selectAll('#fortag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(forestLand.slice(-6),tenYearforTest))}%`);
-        d3.selectAll('#cerealtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cerealYield.slice(-6),tenYearCerealTest))}%`);
-        d3.selectAll('#cashcroptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cashCropYield.slice(-6),tenYearCashTest))}%`);
-        d3.selectAll('#emptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(employmentAg.slice(-6),tenYearEmpTest))}%`);
-        d3.selectAll('#livestocktag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(liveStockProd.slice(-6),tenYearLiveTest))}%`);
+        d3.selectAll('#agritag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(agriLand.slice(-6), tenYearAgriTest))}%`);
+        d3.selectAll('#fortag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(forestLand.slice(-6), tenYearforTest))}%`);
+        d3.selectAll('#cerealtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cerealYield.slice(-6), tenYearCerealTest))}%`);
+        d3.selectAll('#cashcroptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cashCropYield.slice(-6), tenYearCashTest))}%`);
+        d3.selectAll('#emptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(employmentAg.slice(-6), tenYearEmpTest))}%`);
+        d3.selectAll('#livestocktag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(liveStockProd.slice(-6), tenYearLiveTest))}%`);
 
 
         // Creating Plots to compare the forecast between different parameters

@@ -135,23 +135,6 @@ d3.json(link).then(function (data) {
 
         financeUnPackData(chosenCountry);
         financePredict(chosenCountry);
-
-
     })
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

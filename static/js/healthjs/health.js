@@ -1,6 +1,6 @@
 // Reading the Json object available on the server
 async function healthDataUnpack(id) {
-    
+
     console.log(id);
 
     await d3.json('http://127.0.0.1:5000/compileddata').then(function (data) {
@@ -46,7 +46,7 @@ async function healthDataUnpack(id) {
             cancerDeaths.push(countryFilter[key].total_cancer_deaths);
             obesity.push(countryFilter[key].total_obesity_numbers);
             year.push(parseTime(countryFilter[key]._year));
-            
+
 
 
         })
@@ -152,7 +152,7 @@ async function healthDataUnpack(id) {
         var deathData = [deathsTrace];
         var populationData = [populationTrace];
         var gdpData = [gdpTrace];
-        
+
 
         var birthLayout = {
             title: `Total Births`,

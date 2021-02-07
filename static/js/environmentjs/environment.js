@@ -27,7 +27,7 @@ async function environmentDataUnpack(id) {
         let year = [];
 
         // Iterating through the filtered dataset objects
-        Object.keys(countryFilter).forEach(function(key){
+        Object.keys(countryFilter).forEach(function (key) {
             p25airpol.push(countryFilter[key].pm2_5_air_pollution);
             population.push(countryFilter[key].population);
             electricityacess.push(countryFilter[key].access_to_electricity_pct);
@@ -35,7 +35,7 @@ async function environmentDataUnpack(id) {
             urbanpop.push(countryFilter[key].urban_population_pct);
             electricUse.push(countryFilter[key].electricity_consumption_kwh);
             year.push(parseTime(countryFilter[key]._year));
-            
+
         })
 
         // Creating a trace for all the y variables
@@ -137,7 +137,7 @@ async function environmentDataUnpack(id) {
             plot_bgcolor: '#d7ffe8'
         };
 
-        Plotly.newPlot('p25airpoll', pm25Data,pm25Layout);
+        Plotly.newPlot('p25airpoll', pm25Data, pm25Layout);
 
         var popLayout = {
             title: `Population`,
@@ -176,7 +176,7 @@ async function environmentDataUnpack(id) {
             plot_bgcolor: '#d7ffe8'
         };
 
-        Plotly.newPlot('population', PopoulationData,popLayout);
+        Plotly.newPlot('population', PopoulationData, popLayout);
 
         var electricityLayout = {
             title: `Access to Electricity (%)`,
@@ -215,7 +215,7 @@ async function environmentDataUnpack(id) {
             plot_bgcolor: '#d7ffe8'
         };
 
-        Plotly.newPlot('electricity', electricityAccessData,electricityLayout);
+        Plotly.newPlot('electricity', electricityAccessData, electricityLayout);
 
         var renewableLayout = {
             title: `Renewable Electricity Production`,
@@ -254,9 +254,9 @@ async function environmentDataUnpack(id) {
             plot_bgcolor: '#d7ffe8'
         };
 
-        Plotly.newPlot('renewable', renewableData,renewableLayout);
+        Plotly.newPlot('renewable', renewableData, renewableLayout);
 
-        
+
         var urbanPopLayout = {
             title: `Urban Population`,
             showlegend: true,
@@ -294,7 +294,7 @@ async function environmentDataUnpack(id) {
             plot_bgcolor: '#d7ffe8'
         };
 
-        Plotly.newPlot('urbanpopulation', urbanpopData,urbanPopLayout);
+        Plotly.newPlot('urbanpopulation', urbanpopData, urbanPopLayout);
 
         var electricUseLayout = {
             title: `Electricity Consumption`,
@@ -333,19 +333,7 @@ async function environmentDataUnpack(id) {
             plot_bgcolor: '#d7ffe8'
         };
 
-        Plotly.newPlot('electricityconsumption', eletricUseData,electricUseLayout);
-
-
-
-        
-        
-        
-
-
-        
-        
-        
-
+        Plotly.newPlot('electricityconsumption', eletricUseData, electricUseLayout);
 
 
 

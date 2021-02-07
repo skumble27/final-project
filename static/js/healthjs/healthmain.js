@@ -137,33 +137,11 @@ d3.json(link).then(function (data) {
     d3.selectAll('#populationtag').html('');
     d3.selectAll('#gdptag').html('');
 
-
-
-
     d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data`);
     d3.selectAll('#healthpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
-
 
     console.log(chosenCountry);
     healthDataUnpack(chosenCountry);
     healthPredict(chosenCountry);
-
-
   })
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
