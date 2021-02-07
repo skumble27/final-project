@@ -125,7 +125,7 @@ d3.json(link).then(function (data) {
         d3.selectAll('#foreigntag').html('');
         d3.selectAll('#inflationtag').html('');
         d3.selectAll('#stockstag').html('');
-        d3.selectAll('#cashreservestag').html('');
+        d3.selectAll('#cashreservetag').html('');
 
 
         d3.selectAll('#financedataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Finance Sector Data`);

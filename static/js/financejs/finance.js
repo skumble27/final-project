@@ -241,7 +241,7 @@ async function financeUnPackData(id) {
                 family: 'Arial'
             },
             yaxis: {
-                title: `Foreign Investment (% GDP)`,
+                title: `Foreign Investment`,
                 titlefont: { color: 'white' },
                 tickfont: { color: 'white' },
                 showgrid: false,
@@ -279,7 +279,7 @@ async function financeUnPackData(id) {
                 family: 'Arial'
             },
             yaxis: {
-                title: `Inflation  (%)`,
+                title: `Inflation`,
                 titlefont: { color: 'white' },
                 tickfont: { color: 'white' },
                 showgrid: false,
