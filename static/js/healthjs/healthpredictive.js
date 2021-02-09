@@ -99,7 +99,7 @@ async function healthPredict(id) {
         console.log(testYearsScaled);
         console.log(predYearsScaled);
 
-        d3.selectAll('#healthpredict').append('h2').text("Machine Learning in progress");
+        
 
         // Creating the Neural Networks
         birthtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
@@ -152,20 +152,34 @@ async function healthPredict(id) {
         gdptrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
         gdptrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
+        d3.selectAll('#validate').append('h2').text("Initiated Machine Learning Process");
+        
+
 
         // Fitting the model to the data
-        await birthtrain.fit(yearTF, brithRateTF, { epochs: 100 });
-        await deathtrain.fit(yearTF, deathRateTF, { epochs: 100 });
-        await dtptrain.fit(yearTF, dtpRateTF, { epochs: 100 });
-        await lifetrain.fit(yearTF, lifeRateTF, { epochs: 100 });
-        await measlestrain.fit(yearTF, measlesImmRateTF, { epochs: 100 });
-        await cancercasetrain.fit(yearTF, cancerRateTF, { epochs: 100 });
-        await cancerdeathtrain.fit(yearTF, cancerdeathRateTF, { epochs: 100 });
-        await obesitytrain.fit(yearTF, obesityRateTF, { epochs: 100 });
-        await populationtrain.fit(yearTF, populationRateTF, { epochs: 100 });
-        await gdptrain.fit(yearTF, gdpRateTF, { epochs: 100 });
+        await birthtrain.fit(yearTF, brithRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#birthlog').append('p').text(`Birth Rate Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#birthlog').html('');
+        await deathtrain.fit(yearTF, deathRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#deathlog').append('p').text(`Death Rate Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#deathlog').html('');
+        await dtptrain.fit(yearTF, dtpRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#dtplog').append('p').text(`DTP Immunisation Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#dtplog').html('');
+        await lifetrain.fit(yearTF, lifeRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#lifelog').append('p').text(`Life Expectency Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#lifelog').html('');
+        await measlestrain.fit(yearTF, measlesImmRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#measleslog').append('p').text(`Measles Immunisation Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#measleslog').html('');
+        await cancercasetrain.fit(yearTF, cancerRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cancercaselog').append('p').text(`Cancer Cases Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#cancercaselog').html('');
+        await cancerdeathtrain.fit(yearTF, cancerdeathRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cancerdeathlog').append('p').text(`Cancer Deaths Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#cancerdeathlog').html('');
+        await obesitytrain.fit(yearTF, obesityRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#obesitylog').append('p').text(`Obesity Rates Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#obesitylog').html('');
+        await populationtrain.fit(yearTF, populationRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#populationlog').append('p').text(`Population Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#populationlog').html('');
+        await gdptrain.fit(yearTF, gdpRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#gdplog').append('p').text(`GDP Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#gdplog').html('');
 
         d3.selectAll('#healthpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
+        
 
 
         // Test the accuracy of the predictions
@@ -237,9 +251,9 @@ async function healthPredict(id) {
         let tenYearpopulationTest = conversion(maxArray(population), minArray(population), populationConvert);
         let tenYeargdp = conversion(maxArray(gdp), minArray(gdp), gdppredictConvert);
         let tenYeargdpTest = conversion(maxArray(gdp), minArray(gdp), gdpConvert);
-
         // Inform User that Training is Complete
         d3.selectAll('#healthpredict').append('p').text("Machine Learning Complete, forecasts are available below");
+        d3.selectAll('#validate').html('');
 
         d3.selectAll('#birthtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(-6), tenYearBirthTest))}%`);
         d3.selectAll('#deathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(deathRate.slice(-6), tenYearDeathTest))}%`);
