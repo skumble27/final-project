@@ -153,12 +153,10 @@ async function healthPredict(id) {
         gdptrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
         d3.selectAll('#validate').append('h2').text("Initiated Machine Learning Process");
-        
-
 
         // Fitting the model to the data
         await birthtrain.fit(yearTF, brithRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#birthlog').append('p').text(`Birth Rate Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#birthlog').html('');
+        d3.selectAll('#birthlog').html('')      
         await deathtrain.fit(yearTF, deathRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#deathlog').append('p').text(`Death Rate Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
         d3.selectAll('#deathlog').html('');
         await dtptrain.fit(yearTF, dtpRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#dtplog').append('p').text(`DTP Immunisation Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
@@ -180,8 +178,6 @@ async function healthPredict(id) {
 
         d3.selectAll('#healthpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
         
-
-
         // Test the accuracy of the predictions
         let birthTest = await birthtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
         let deathTest = await deathtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();

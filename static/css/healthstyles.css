@@ -92,10 +92,12 @@
 
 .machinelearning p {
     color: white;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .machinelearning h2 {
     color: white;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .jumbotron {

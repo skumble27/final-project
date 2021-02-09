@@ -99,6 +99,20 @@
     color: #16d954;
 }
 
+.machinelearning {
+    background-color: black;
+}
+
+.machinelearning p {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.machinelearning h2 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 body{
     background-color:#fff9e9;
 }
