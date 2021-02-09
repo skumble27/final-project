@@ -113,15 +113,24 @@ async function environmentPredict(id) {
         electricUseTrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
         electricUseTrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
+        d3.selectAll('#validate').append('h2').text("Initiated Machine Learning Process");
+
         // Fitting the model to the Tensorflow 2d arrays
-        await p25airpolTrain.fit(yearTF, p25airpolTF, { epochs: 100 });
-        await populationTrain.fit(yearTF, populationTF, { epochs: 100 });
-        await electricityAccessTrain.fit(yearTF, electricAccessTF, { epochs: 100 });
-        await renewableTrain.fit(yearTF, renewableTF, { epochs: 100 });
-        await urbanPopTrain.fit(yearTF, urbanpopTF, { epochs: 100 });
-        await electricUseTrain.fit(yearTF, electricityUseTF, { epochs: 100 });
+        await p25airpolTrain.fit(yearTF, p25airpolTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#airpollog').append('p').text(`Airpollution Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#airpollog').html('');
+        await populationTrain.fit(yearTF, populationTF, { epochs: 100,callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#poplog').append('p').text(`Population Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#poplog').html('');
+        await electricityAccessTrain.fit(yearTF, electricAccessTF, { epochs: 100,callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#electriclog').append('p').text(`Electricity Access Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#electriclog').html('');
+        await renewableTrain.fit(yearTF, renewableTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#renewablelog').append('p').text(`Renewable Energy Use Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#renewablelog').html('');
+        await urbanPopTrain.fit(yearTF, urbanpopTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#urbanpoplog').append('p').text(`Urban Population Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#urbanpoplog').html('')
+        await electricUseTrain.fit(yearTF, electricityUseTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#electricuselog').append('p').text(`Electricity Usage Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#electricuselog').html('');
 
         d3.selectAll('#environmentpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
+        d3.selectAll('#validate').html('');
 
         // Test the accuracy of the predictions
         let p25airpolTest = await p25airpolTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();

@@ -135,16 +135,21 @@ async function agriPredict(id) {
         livestockTrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
         livestockTrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
-        // Making a prediction on the data for Births
-        await agriTrain.fit(yearTF, agriTF, { epochs: 100 });
-        await foresrTrain.fit(yearTF, forestTF, { epochs: 100 });
-        await cerealTrain.fit(yearTF, cerealTF, { epochs: 100 });
-        await cashCropTrain.fit(yearTF, cashCropTF, { epochs: 100 });
-        await employmentTrain.fit(yearTF, empTF, { epochs: 100 });
-        await populationTrain.fit(yearTF, populationTF, { epochs: 100 });
-        await gdpTrain.fit(yearTF, gdpTF, { epochs: 100 });
-        await livestockTrain.fit(yearTF, livestockTF, { epochs: 100 });
+        d3.selectAll('#validate').append('h2').text("Initiated Machine Learning Process");
 
+        // Making a prediction on the data for Births
+        await agriTrain.fit(yearTF, agriTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#agrilog').append('p').text(`Agri Land Area Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#agrilog').html('');
+        await foresrTrain.fit(yearTF, forestTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#forlog').append('p').text(`Forest Land Area Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#forlog').html('');
+        await cerealTrain.fit(yearTF, cerealTF, { epochs: 100,callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cereallog').append('p').text(`Cereal Crops Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#cereallog').html('');
+        await cashCropTrain.fit(yearTF, cashCropTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cashlog').append('p').text(`Cash Crops Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#cashlog').html('');
+        await employmentTrain.fit(yearTF, empTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#emplog').append('p').text(`Employment in Agricutlure - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#emplog').html('');
+        await livestockTrain.fit(yearTF, livestockTF, { epochs: 500,callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#livestocklog').append('p').text(`Livestock Production Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#livestocklog').html('');
         // Announce that training is complete
         d3.selectAll('#agripredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
 
@@ -207,6 +212,7 @@ async function agriPredict(id) {
         // Inform the user that training is complete
 
         d3.selectAll('#agripredict').append('p').text("Machine Learning Complete, forecasts are available below");
+        d3.selectAll('#validate').html('');
 
         d3.selectAll('#agritag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(agriLand.slice(-6), tenYearAgriTest))}%`);
         d3.selectAll('#fortag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(forestLand.slice(-6), tenYearforTest))}%`);

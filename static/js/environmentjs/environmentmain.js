@@ -118,6 +118,13 @@ d3.json(link).then(function (data) {
     d3.selectAll('#predurbanpopulation').html('');
     d3.selectAll('#predelectricityconsumption').html('');
 
+    d3.selectAll('#airpoltag').html('');
+    d3.selectAll('#poptag').html('');
+    d3.selectAll('#electrictag').html('');
+    d3.selectAll('#renewabletag').html('');
+    d3.selectAll('#urbanpoptag').html('');
+    d3.selectAll('#electricusetag').html('');
+
 
 
     d3.selectAll('#environmentplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Environmental Data`);

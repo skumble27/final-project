@@ -79,6 +79,20 @@
     color: #16d954;
 }
 
+.machinelearning {
+    background-color: black;
+}
+
+.machinelearning p {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.machinelearning h2 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .jumbotron {
     background-image: url('images/environment.jpg');
     background-size: cover;

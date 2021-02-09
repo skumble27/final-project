@@ -119,18 +119,28 @@ async function financePredict(id) {
         gdpTrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
         gdpTrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
 
-        // Training the Neural Networks
-        await broadMoneyTrain.fit(yearTF, broadMoneyTF, { epochs: 100 });
-        await domesticTrain.fit(yearTF, domesticCompanyTF, { epochs: 100 });
-        await foreignTrain.fit(yearTF, foreignTF, { epochs: 100 });
-        await inflationTrain.fit(yearTF, inflationTF, { epochs: 100 });
-        await stockTrain.fit(yearTF, stockTF, { epochs: 100 });
-        await totalReservesTrain.fit(yearTF, totalReserveTF, { epochs: 100 });
-        await gdpTrain.fit(yearTF, gdpTF, { epochs: 100 });
+        d3.selectAll('#validate').append('h2').text("Initiated Machine Learning Process");
 
+        // Training the Neural Networks
+        await broadMoneyTrain.fit(yearTF, broadMoneyTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#broadmoneylog').append('p').text(`Broad Money Growth Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#broadmoneylog').html('');
+        await domesticTrain.fit(yearTF, domesticCompanyTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#domesticcomplog').append('p').text(`List of Domestic Companies Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#domesticcomplog').html('');
+        await foreignTrain.fit(yearTF, foreignTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#foreignlog').append('p').text(`Foreign Investment Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#foreignlog').html('');
+        await inflationTrain.fit(yearTF, inflationTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#inflationlog').append('p').text(`Inflation Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#inflationlog').html('');
+        await stockTrain.fit(yearTF, stockTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#stockslog').append('p').text(`Stocks Traded Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#stockslog').html('');
+        await totalReservesTrain.fit(yearTF, totalReserveTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#stockslog').append('p').text(`Cash Reserves Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#stockslog').html('');
+        await gdpTrain.fit(yearTF, gdpTF, { epochs: 500, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cashreserveslog').append('p').text(`GDP Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
+        d3.selectAll('#cashreserveslog').html('');
 
 
         d3.selectAll('#financepredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
+        d3.selectAll('#validate').html('');
+
 
         // Testing the accuracy of the predictions
         let broadMoneyTest = await broadMoneyTrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
