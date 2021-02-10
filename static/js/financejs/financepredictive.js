@@ -65,14 +65,14 @@ async function financePredict(id) {
         console.log(SimpleMovingAverage(broadMoneyGrowth,20));
 
         // Converting arrays to tensorflow arrays
-        let broadMoneyTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(broadMoneyGrowth,3)).slice(-6)),[(SimpleMovingAverage(broadMoneyGrowth,3)).slice(-6).length,1]);
-        let domesticCompanyTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(domesticCompanies,3).slice(-6))),[(SimpleMovingAverage(domesticCompanies,3)).slice(-6).length,1]);
-        let foreignTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(foreignInvestment,3)).slice(-6)),[(SimpleMovingAverage(foreignInvestment,3)).slice(-6).length,1]);
-        let inflationTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(inflation,3).slice(-6))),[(SimpleMovingAverage(inflation,3)).slice(-6).length,1]);
-        let stockTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(stockTrade,3).slice(-6))),[(SimpleMovingAverage(stockTrade,3)).slice(-6).length,1]);
-        let totalReserveTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(totalReserves,3).slice(-6))),[(SimpleMovingAverage(totalReserves,3)).slice(-6).length,1]);
-        let gdpTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(gdp,3).slice(-6))),[(SimpleMovingAverage(gdp,3)).slice(-6).length,1]);
-        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
+        let broadMoneyTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(broadMoneyGrowth,3))),[(SimpleMovingAverage(broadMoneyGrowth,3)).length,1]);
+        let domesticCompanyTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(domesticCompanies,3))),[(SimpleMovingAverage(domesticCompanies,3)).length,1]);
+        let foreignTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(foreignInvestment,3))),[(SimpleMovingAverage(foreignInvestment,3)).length,1]);
+        let inflationTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(inflation,3))),[(SimpleMovingAverage(inflation,3)).length,1]);
+        let stockTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(stockTrade,3))),[(SimpleMovingAverage(stockTrade,3)).length,1]);
+        let totalReserveTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(totalReserves,3))),[(SimpleMovingAverage(totalReserves,3)).length,1]);
+        let gdpTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(gdp,3))),[(SimpleMovingAverage(gdp,3)).length,1]);
+        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-59)), [intYear.slice(-59).length, 1]);
 
 
         // Scaling the predictive years
