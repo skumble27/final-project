@@ -70,3 +70,21 @@ function mean(array) {
     return meanValue.toFixed(4);
 
 }
+
+function average(numbers) {
+    return _.reduce(numbers, (a, b) => a + b, 0) / (numbers.length || 1);
+  }
+
+
+ 
+function SimpleMovingAverage(array,window){
+
+    var SAM = [];
+    for (var i=1; i <array.length -1; i++){
+        var mean = (array[i] + array[i-1] + array[i+1])/window;
+        SAM.push(mean);
+
+    }
+    return SAM;
+
+};

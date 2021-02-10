@@ -52,6 +52,16 @@ async function financeUnPackData(id) {
             line: { color: '#87fffd' }
         }
 
+        var broadMoneyTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(broadMoneyGrowth,3),
+            line: { color: 'red' }
+
+        }
+
         var domesticCompanyTrace = {
             type: 'scatter',
             mode: 'lines',
@@ -61,6 +71,16 @@ async function financeUnPackData(id) {
             line: { color: '#87fffd' }
         }
 
+        var domesticCompanyTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(domesticCompanies,3),
+            line: { color: 'red' }
+        }
+
+
         var foreignInvestTrace = {
             type: 'scatter',
             mode: 'lines',
@@ -68,6 +88,15 @@ async function financeUnPackData(id) {
             x: year,
             y: foreignInvestment,
             line: { color: '#87fffd' }
+        }
+
+        var foreignInvestTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(foreignInvestment,3),
+            line: { color: 'red' }
         }
 
         var inflationTrace = {
@@ -79,6 +108,15 @@ async function financeUnPackData(id) {
             line: { color: '#87fffd' }
         }
 
+        var inflationTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(inflation,3),
+            line: { color: 'red' }
+        }
+
         var stockTradeTrace = {
             type: 'scatter',
             mode: 'lines',
@@ -88,6 +126,17 @@ async function financeUnPackData(id) {
             line: { color: '#87fffd' }
         }
 
+        var stockTradeTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(stockTrade,3),
+            line: { color: 'red' }
+        }
+
+        
+
         var totalReservesTrace = {
             type: 'scatter',
             mode: 'lines',
@@ -96,6 +145,17 @@ async function financeUnPackData(id) {
             y: totalReserves,
             line: { color: '#87fffd' }
         }
+
+        var totalReservesTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(totalReserves,3),
+            line: { color: 'red' }
+        }
+        
+
         var gdpTrace = {
             type: 'scatter',
             mode: 'lines',
@@ -105,13 +165,22 @@ async function financeUnPackData(id) {
             line: { color: '#87fffd' }
         }
 
-        var broadMoneyData = [broadMoneyTrace];
-        var domesticData = [domesticCompanyTrace];
-        var foreignInvestData = [foreignInvestTrace];
-        var inflationData = [inflationTrace];
-        var stocktradeData = [stockTradeTrace];
-        var totalreservesData = [totalReservesTrace];
-        var gdpData = [gdpTrace];
+        var gdpTraceSAM = {
+            type: 'scatter',
+            mode: 'lines',
+            name: `Simple Moving Average`,
+            x: year,
+            y: SimpleMovingAverage(gdp,3),
+            line: { color: 'red' }
+        }
+
+        var broadMoneyData = [broadMoneyTrace, broadMoneyTraceSAM];
+        var domesticData = [domesticCompanyTrace, domesticCompanyTraceSAM];
+        var foreignInvestData = [foreignInvestTrace, foreignInvestTraceSAM];
+        var inflationData = [inflationTrace, inflationTraceSAM];
+        var stocktradeData = [stockTradeTrace, stockTradeTraceSAM];
+        var totalreservesData = [totalReservesTrace, totalReservesTraceSAM];
+        var gdpData = [gdpTrace, gdpTraceSAM];
 
         var broadMoneyLayout = {
             title: `Broad Money Growth`,
@@ -131,6 +200,16 @@ async function financeUnPackData(id) {
                 showgrid: false,
                 gridcolor: 'white',
                 zerolinecolor: 'white'
+
+            },
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
+
 
             },
 
@@ -172,6 +251,17 @@ async function financeUnPackData(id) {
 
             },
 
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
+
+
+            },
+
             xaxis: {
                 autorange: true,
                 range: [1961, 2018],
@@ -207,6 +297,16 @@ async function financeUnPackData(id) {
                 showgrid: false,
                 gridcolor: 'white',
                 zerolinecolor: 'white'
+
+            },
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
+
 
             },
 
@@ -249,7 +349,16 @@ async function financeUnPackData(id) {
                 zerolinecolor: 'white'
 
             },
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
 
+
+            },
             xaxis: {
                 autorange: true,
                 range: [1961, 2018],
@@ -287,7 +396,16 @@ async function financeUnPackData(id) {
                 zerolinecolor: 'white'
 
             },
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
 
+
+            },
             xaxis: {
                 autorange: true,
                 range: [1961, 2018],
@@ -325,7 +443,16 @@ async function financeUnPackData(id) {
                 zerolinecolor: 'white'
 
             },
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
 
+
+            },
             xaxis: {
                 autorange: true,
                 range: [1961, 2018],
@@ -363,7 +490,16 @@ async function financeUnPackData(id) {
                 zerolinecolor: 'white'
 
             },
+            yaxis2: {
+                title:"Simple Moving Average",
+                titlefont: { color: 'white' },
+                tickfont: { color: 'white' },
+                showgrid: false,
+                gridcolor: 'white',
+                zerolinecolor: 'white'
 
+
+            },
             xaxis: {
                 autorange: true,
                 range: [1961, 2018],

@@ -62,15 +62,16 @@ async function financePredict(id) {
         let predYears = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
         let testYears = [2015, 2016, 2017, 2018, 2019, 2020];
 
+        console.log(SimpleMovingAverage(broadMoneyGrowth,20));
 
         // Converting arrays to tensorflow arrays
-        let broadMoneyTF = tf.tensor2d(MinMaxScaler(broadMoneyGrowth.slice(-6)), [broadMoneyGrowth.slice(-6).length, 1]);
-        let domesticCompanyTF = tf.tensor2d(MinMaxScaler(domesticCompanies.slice(-6)), [domesticCompanies.slice(-6).length, 1]);
-        let foreignTF = tf.tensor2d(MinMaxScaler(foreignInvestment.slice(-6)), [foreignInvestment.slice(-6).length, 1]);
-        let inflationTF = tf.tensor2d(MinMaxScaler(inflation.slice(-6)), [inflation.slice(-6).length, 1]);
-        let stockTF = tf.tensor2d(MinMaxScaler(stockTrade.slice(-6)), [stockTrade.slice(-6).length, 1]);
-        let totalReserveTF = tf.tensor2d(MinMaxScaler(totalReserves.slice(-6)), [totalReserves.slice(-6).length, 1]);
-        let gdpTF = tf.tensor2d(MinMaxScaler(gdp.slice(-6)), [gdp.slice(-6).length, 1]);
+        let broadMoneyTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(broadMoneyGrowth,3)).slice(-6)),[(SimpleMovingAverage(broadMoneyGrowth,3)).slice(-6).length,1]);
+        let domesticCompanyTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(domesticCompanies,3).slice(-6))),[(SimpleMovingAverage(domesticCompanies,3)).slice(-6).length,1]);
+        let foreignTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(foreignInvestment,3)).slice(-6)),[(SimpleMovingAverage(foreignInvestment,3)).slice(-6).length,1]);
+        let inflationTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(inflation,3).slice(-6))),[(SimpleMovingAverage(inflation,3)).slice(-6).length,1]);
+        let stockTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(stockTrade,3).slice(-6))),[(SimpleMovingAverage(stockTrade,3)).slice(-6).length,1]);
+        let totalReserveTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(totalReserves,3).slice(-6))),[(SimpleMovingAverage(totalReserves,3)).slice(-6).length,1]);
+        let gdpTF = tf.tensor2d((MinMaxScaler(SimpleMovingAverage(gdp,3).slice(-6))),[(SimpleMovingAverage(gdp,3)).slice(-6).length,1]);
         let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
 
 
@@ -206,9 +207,6 @@ async function financePredict(id) {
         d3.selectAll('#inflationtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(inflation.slice(-6), tenYearInflationTest))}%`);
         d3.selectAll('#stockstag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(stockTrade.slice(-6), tenYearStockTest))}%`);
         d3.selectAll('#cashreservetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(totalReserves.slice(-6), tenYearReservesTest))}%`);
-
-
-
 
         // Creating a table to show the ML Predictions
         var Broadlayout = {
