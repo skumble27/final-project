@@ -65,86 +65,25 @@
         <!-- Time Series Data Using Plotly -->
         <div class="row">
             <div class="col-md-6">
-                <div id='broadmoney'></div>
+                <canvas id='broadmoney'></canvas>
             </div>
             <div class="col-md-6">
-                <div id='domesticcompanies'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='gdp'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='foreigninvestment'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='inflation'></div>
+                <canvas id='domesticcompanies'></canvas>
             </div>
 
             <div class="col-md-6">
-                <div id='stockstraded'></div>
+                <canvas id='foreigninvestment'></canvas>
             </div>
             <div class="col-md-6">
-                <div id='totalreserves'></div>
-            </div>
-
-        </div>
-
-        <div class="machinelearning">
-            <div id='validate'>
-                <h2></h2>
-            </div>
-            <div id='broadmoneylog'></div>
-            <div id='domesticcomplog'></div>
-            <div id='gdplog'></div>
-            <div id='foreignlog'></div>
-            <div id='inflationlog'></div>
-            <div id='stockslog'></div>
-            <div id='cashreserveslog'></div>
-        </div>
-
-        <div class="row">
-            <div id='financepredict' class="finance col-md-12">
-                <h2></h2>
-                <h3></h3>
-                <p></p>
-            </div>
-        </div>
-
-        <!-- Predictive Analysis Tables -->
-        <div class="row">
-            <div class="col-md-6">
-                <div id='predbroadmoney'></div>
-                <div id='broadmoneytag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='preddomesticcompanies'></div>
-                <div id='domesticcomptag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predgdp'></div>
-                <div id='gdptag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predforeigninvestment'></div>
-                <div id='foreigntag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predinflation'></div>
-                <div id='inflationtag'></div>
+                <canvas id='inflation'></canvas>
             </div>
 
             <div class="col-md-6">
-                <div id='predstockstraded'></div>
-                <div id='stockstag'></div>
+                <canvas id='stockstraded'></canvas>
             </div>
             <div class="col-md-6">
-                <div id='predtotalreserves'></div>
-                <div id='cashreservetag'></div>
+                <canvas id='totalreserves'></canvas>
             </div>
-
-        </div>
-
-        <div class="row">
 
         </div>
 
@@ -158,6 +97,9 @@
         </div>
 
     </footer>
+    <!-- Chart js -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <!-- Leaflet Library -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
         integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="

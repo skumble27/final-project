@@ -50,7 +50,7 @@
 }
 
 .footer {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     color: rgb(0, 0, 0);
     padding: 10px;
     font-size: 20px;
@@ -60,7 +60,7 @@
 }
 
 .footer p{
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 
@@ -71,7 +71,7 @@
 }
 
 .finance h1 {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .finance h2 {
@@ -92,7 +92,7 @@
 }
 
 .machinelearning p {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -134,11 +134,11 @@ hr{
 
 
 body{
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 }
 
 p {
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .leaflet-popup-content-wrapper {
