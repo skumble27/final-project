@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel='stylesheet' scr='text/css' href="static/css/healthstyles.css">
+
+    <title>Healthcare Forecast</title>
+
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="navbarformat col-md-6">
+            <nav class="navbar-light">
+                <a href="index.html">
+                    <img src='static/css/images/MLAnalytics.svg' width="200" height="50"
+                        class="d-inline-block align-top" alt="" loading="lazy">
+                </a>
+
+            </nav>
+        </div>
+        <div class="navbarformatright col-md-2">
+            <a href="agriculturesector.html">Agriculture Sector</a>
+        </div>
+        <div class="navbarformatright col-md-2">
+            <a href="financesector.html">Finance Sector</a>
+        </div>
+        <div class="navbarformatright col-md-2">
+            <a href="environment.html">Environment Sector</a>
+        </div>
+
+    </div>
+
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Healthcare Sector</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="health col-md-12">
+                <h1>Overview</h1>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <div class='mapformat' id='healthmapid'></div>
+            </div>
+        </div><br><br><br>
+        <div class="row">
+            <div id='healthdataplotly' class="health col-md-12">
+                <h1></h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Plotting the time series -->
+                <canvas id='totalbirths'></canvas>
+
+            </div><br><br><br><br><br><br>
+            <div class="col-md-6">
+                <canvas id='totaldeaths'></canvas>
+            </div><br><br><br><br><br><br>
+            <div class="col-md-6">
+                <canvas id='dtp'></canvas>
+            </div><br><br><br><br><br><br>
+            <div class="col-md-6">
+                <canvas id='measles'></canvas>
+            </div><br><br><br><br><br><br>
+            <div class="col-md-6">
+                <canvas id='cancercases'></canvas>
+            </div><br><br><br><br><br><br>
+            <div class="col-md-6">
+                <canvas id='cancerdeaths'></canvas>
+            </div><br><br><br><br><br><br>
+
+            <div class="col-md-6">
+                <canvas id='obesity'></canvas>
+            </div><br><br><br><br><br><br>
+
+            <div class="col-md-6">
+                <canvas id='life'></canvas>
+            </div><br><br><br><br><br><br>
+            
+            <div class="col-md-6">
+                <canvas id='population'></canvas>
+            </div><br><br><br><br><br><br>
+            
+            <div class="col-md-6">
+                <canvas id='gdp'></canvas>
+            </div><br><br><br><br><br><br>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    </div>
+
+    <footer class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Sumukh Kumble, 2021</p>
+            </div>
+        </div>
+
+    </footer>
+
+
+    <!-- Chart js -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Leaflet Library -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+    <!-- Tensorflow JS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+    <!-- D3 javascript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Plotly JavaScript Library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Custom JavaScript Libraries -->
+    <script src="static/js/healthjs/healthpredictive.js"></script>
+    <script src="static/js/config.js"></script>
+    <script src="static/js/mathsfunctions.js"></script>
+
+    <script src="static/js/healthjs/healthmain.js"></script>
+
+</body>
+
+</html>

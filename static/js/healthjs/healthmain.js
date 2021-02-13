@@ -141,7 +141,7 @@ d3.json(link).then(function (data) {
     d3.selectAll('#healthpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
 
     console.log(chosenCountry);
-    healthDataUnpack(chosenCountry);
+    
     healthPredict(chosenCountry);
   })
 })

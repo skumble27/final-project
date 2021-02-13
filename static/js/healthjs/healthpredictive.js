@@ -1,29 +1,63 @@
 async function healthPredict(id) {
-
     console.log(id);
 
-    await d3.json('http://127.0.0.1:5000/compileddata').then(async function (data) {
+    d3.csv('cleaned_data/healthsector_data/healthsector.csv').then(function (data) {
 
-        // Checking to see if the dataset has been read
-        // console.log(data);
+        console.log(data);
 
-        // Filtering by country
         let countryFilter = data.filter(nation => nation.country === id);
         console.log(countryFilter);
 
         // Creating a list of empty arrays for later appendage
 
         let brithRate = [];
-        let deathRate = [];
-        let dtpImmunisation = [];
-        let gdp = [];
-        let lifeExpectency = [];
-        let measlesImmunisation = [];
-        let population = [];
-        let cancerCases = [];
-        let cancerDeaths = [];
-        let obesity = [];
+        let brithRateLow = [];
+        let brithRateHigh = [];
+        let brithRatePred = [];
 
+        let deathRate = [];
+        let deathRateLow = [];
+        let deathRateHigh = [];
+        let deathRatePred = [];
+
+        let dtpImmunisation = [];
+        let dtpImmunisationLow = [];
+        let dtpImmunisationHigh = [];
+        let dtpImmunisationPred = [];
+
+        let gdp = [];
+        let gdpLow = [];
+        let gdpHigh = [];
+        let gdpPred = [];
+
+        let lifeExpectency = [];
+        let lifeExpectencyLow = [];
+        let lifeExpectencyHigh = [];
+        let lifeExpectencyPred = [];
+
+        let measlesImmunisation = [];
+        let measlesImmunisationLow = [];
+        let measlesImmunisationHigh = [];
+        let measlesImmunisationPred = [];
+
+        let population = [];
+        let populationLow = [];
+        let populationHigh = [];
+        let populationPred = [];
+
+        let cancerCases = [];
+        let cancerCasesLow = [];
+        let cancerCasesHigh = [];
+        let cancerCasesPred = [];
+
+        let cancerDeaths = [];
+        let cancerDeathsLow = [];
+        let cancerDeathsHigh = [];
+        let cancerDeathsPred = [];
+        let obesity = [];
+        let obesityLow = [];
+        let obesityHigh = [];
+        let obesityPred = [];
 
 
         // Creating a time parse for date
@@ -31,459 +65,848 @@ async function healthPredict(id) {
 
         // Creating the x-axis 
         let year = [];
-        let rawYear = [];
 
-        let intYear = [];
 
         // Iterating through the filtered dataset objects
         Object.keys(countryFilter).forEach(function (key) {
             brithRate.push(countryFilter[key].birth_rate);
-            deathRate.push(countryFilter[key].death_rate);
-            dtpImmunisation.push(countryFilter[key].dtp_immunisation);
-            gdp.push(countryFilter[key].gdp_current_usd);
-            lifeExpectency.push(countryFilter[key].life_expectency);
-            measlesImmunisation.push(countryFilter[key].measles_immunisation);
-            population.push(countryFilter[key].population);
-            cancerCases.push(countryFilter[key].total_cancer_cases);
-            cancerDeaths.push(countryFilter[key].total_cancer_deaths);
-            obesity.push(countryFilter[key].total_obesity_numbers);
-            year.push(parseTime(countryFilter[key]._year));
-            rawYear.push(countryFilter[key]._year);
+            brithRateLow.push(countryFilter[key].birth_rate_low);
+            brithRateHigh.push(countryFilter[key].birth_rate_high);
+            brithRatePred.push(countryFilter[key].birth_rate_pred);
 
+            deathRate.push(countryFilter[key].death_rate);
+            deathRateLow.push(countryFilter[key].death_rate_low);
+            deathRateHigh.push(countryFilter[key].death_rate_high);
+            deathRatePred.push(countryFilter[key].death_rate_pred);
+
+            dtpImmunisation.push(countryFilter[key].dtp_immunisation);
+            dtpImmunisationLow.push(countryFilter[key].dtp_immunisation_low);
+            dtpImmunisationHigh.push(countryFilter[key].dtp_immunisation_high);
+            dtpImmunisationPred.push(countryFilter[key].dtp_immunisation_pred);
+
+            gdp.push(countryFilter[key].gdp_current_usd);
+            gdpLow.push(countryFilter[key].gdp_lower);
+            gdpHigh.push(countryFilter[key].gdp_higher);
+            gdpPred.push(countryFilter[key].gdp_pred);
+
+            lifeExpectency.push(countryFilter[key].life_expectency);
+            lifeExpectencyLow.push(countryFilter[key].life_expectency_low);
+            lifeExpectencyHigh.push(countryFilter[key].life_expectency_high);
+            lifeExpectencyPred.push(countryFilter[key].life_expectency_pred);
+
+            measlesImmunisation.push(countryFilter[key].measles_immunisation);
+            measlesImmunisationLow.push(countryFilter[key].measles_immunisation_low);
+            measlesImmunisationHigh.push(countryFilter[key].measles_immunisation_high);
+            measlesImmunisationPred.push(countryFilter[key].measles_immunisation_pred);
+
+            population.push(countryFilter[key].population);
+            populationLow.push(countryFilter[key].pop_lower);
+            populationHigh.push(countryFilter[key].pop_higher);
+            populationPred.push(countryFilter[key].pop_pred);
+
+            cancerCases.push(countryFilter[key].total_cancer_cases);
+            cancerCasesLow.push(countryFilter[key].cancer_case_lower);
+            cancerCasesHigh.push(countryFilter[key].cancer_case_higher);
+            cancerCasesPred.push(countryFilter[key].cancer_case_pred);
+
+            cancerDeaths.push(countryFilter[key].total_cancer_deaths);
+            cancerDeathsLow.push(countryFilter[key].total_cancer_deaths_err_low);
+            cancerDeathsHigh.push(countryFilter[key].total_cancer_deaths_err_high);
+            cancerDeathsPred.push(countryFilter[key].total_cancer_deaths_pred);
+
+            obesity.push(countryFilter[key].total_obesity_numbers);
+            obesityLow.push(countryFilter[key].total_obesity_numbers_low);
+            obesityHigh.push(countryFilter[key].total_obesity_numbers_high);
+            obesityPred.push(countryFilter[key].total_obesity_numbers_pred);
+
+            year.push(countryFilter[key]._year);
 
         })
 
-        // Creating an integer of years
-        for (var i = 0; i < rawYear.length; i++) {
-            // console.log(new Date(rawYear[i]).getFullYear());
-            intYear.push(new Date(rawYear[i]).getFullYear());
-        }
-        console.log(intYear);
-
-        // console.log(intYear);
-
-        // Creating the Machine Learning Algorithm for reach data
-        const birthtrain = tf.sequential();
-        const deathtrain = tf.sequential();
-        const dtptrain = tf.sequential();
-        const lifetrain = tf.sequential();
-        const measlestrain = tf.sequential();
-        const cancercasetrain = tf.sequential();
-        const cancerdeathtrain = tf.sequential();
-        const obesitytrain = tf.sequential();
-        const populationtrain = tf.sequential();
-        const gdptrain = tf.sequential();
-
-
-        // Creating a 10 year forecast
-        let predYears = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
-        let testYears = [2015, 2016, 2017, 2018, 2019, 2020];
-
-        // Converting Arrays to Tensorflow arrays
-        let brithRateTF = tf.tensor2d(MinMaxScaler(brithRate.slice(-6)), [brithRate.slice(-6).length, 1]);
-        let yearTF = tf.tensor2d(MinMaxScaler(intYear.slice(-6)), [intYear.slice(-6).length, 1]);
-        let deathRateTF = tf.tensor2d(MinMaxScaler(deathRate.slice(-6)), [deathRate.slice(-6).length, 1]);
-        let dtpRateTF = tf.tensor2d(MinMaxScaler(dtpImmunisation.slice(-6)), [dtpImmunisation.slice(-6).length, 1]);
-        let lifeRateTF = tf.tensor2d(MinMaxScaler(lifeExpectency.slice(-6)), [lifeExpectency.slice(-6).length, 1]);
-        let measlesImmRateTF = tf.tensor2d(MinMaxScaler(measlesImmunisation.slice(-6)), [measlesImmunisation.slice(-6).length, 1]);
-        let cancerRateTF = tf.tensor2d(MinMaxScaler(cancerCases.slice(-6)), [cancerCases.slice(-6).length, 1]);
-        let cancerdeathRateTF = tf.tensor2d(MinMaxScaler(cancerDeaths.slice(-6)), [cancerDeaths.slice(-6).length, 1]);
-        let obesityRateTF = tf.tensor2d(MinMaxScaler(obesity.slice(-6)), [obesity.slice(-6).length, 1]);
-        let populationRateTF = tf.tensor2d(MinMaxScaler(population.slice(-6)), [population.slice(-6).length, 1]);
-        let gdpRateTF = tf.tensor2d(MinMaxScaler(gdp.slice(-6)), [gdp.slice(-6).length, 1]);
-
-        // Scaling the predictive years
-        let testYearsScaled = yearScale(testYears);
-        let predYearsScaled = yearScale(predYears);
-
-        console.log(testYearsScaled);
-        console.log(predYearsScaled);
-
-        
-
-        // Creating the Neural Networks
-        birthtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        birthtrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        birthtrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        birthtrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        deathtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        deathtrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        deathtrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        deathtrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        dtptrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        dtptrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        dtptrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        dtptrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        lifetrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        lifetrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        lifetrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        lifetrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        measlestrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        measlestrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        measlestrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        measlestrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        cancercasetrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        cancercasetrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        cancercasetrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        cancercasetrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        cancerdeathtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        cancerdeathtrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        cancerdeathtrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        cancerdeathtrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        obesitytrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        obesitytrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        obesitytrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        obesitytrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        populationtrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        populationtrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        populationtrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        populationtrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        gdptrain.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'relu', kernelInitializer: 'ones' }));
-        gdptrain.add(tf.layers.dense({ units: 61, inputShape: [1] }));
-        gdptrain.add(tf.layers.dense({ units: 1, inputShape: [61] }));
-        gdptrain.compile({ loss: 'meanSquaredError', optimizer: tf.train.adam() });
-
-        d3.selectAll('#validate').append('h2').text("Initiated Machine Learning Process");
-
-        // Fitting the model to the data
-        await birthtrain.fit(yearTF, brithRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#birthlog').append('p').text(`Birth Rate Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#birthlog').html('')      
-        await deathtrain.fit(yearTF, deathRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#deathlog').append('p').text(`Death Rate Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#deathlog').html('');
-        await dtptrain.fit(yearTF, dtpRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#dtplog').append('p').text(`DTP Immunisation Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#dtplog').html('');
-        await lifetrain.fit(yearTF, lifeRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#lifelog').append('p').text(`Life Expectency Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#lifelog').html('');
-        await measlestrain.fit(yearTF, measlesImmRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#measleslog').append('p').text(`Measles Immunisation Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#measleslog').html('');
-        await cancercasetrain.fit(yearTF, cancerRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cancercaselog').append('p').text(`Cancer Cases Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#cancercaselog').html('');
-        await cancerdeathtrain.fit(yearTF, cancerdeathRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#cancerdeathlog').append('p').text(`Cancer Deaths Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#cancerdeathlog').html('');
-        await obesitytrain.fit(yearTF, obesityRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#obesitylog').append('p').text(`Obesity Rates Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#obesitylog').html('');
-        await populationtrain.fit(yearTF, populationRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#populationlog').append('p').text(`Population Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#populationlog').html('');
-        await gdptrain.fit(yearTF, gdpRateTF, { epochs: 100, callbacks: {onEpochEnd: async (epoch, logs)=> d3.selectAll('#gdplog').append('p').text(`GDP Data - Epochs: ${epoch}, loss: ${JSON.stringify(logs)}`)} });
-        d3.selectAll('#gdplog').html('');
-
-        d3.selectAll('#healthpredict').append('h3').text("Validating Predictive Models (Returning Mean Percentage Error)");
-        
-        // Test the accuracy of the predictions
-        let birthTest = await birthtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let deathTest = await deathtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let dtpTest = await dtptrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let lifeTest = await lifetrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let measlesImmTest = await measlestrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let cancercaseTest = await cancercasetrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let cancerdeathTest = await cancerdeathtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let obesityTest = await obesitytrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let populationTest = await populationtrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-        let gdpTest = await gdptrain.predict(tf.tensor2d(testYearsScaled, [testYearsScaled.length, 1])).dataSync();
-
-        // Predict for the next ten years
-        let birthpredict = await birthtrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let deathpredict = await deathtrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let dtppredict = await dtptrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let lifepredict = await lifetrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let measlesImmpredict = await measlestrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let cancercasepredict = await cancercasetrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let cancerdeathpredict = await cancerdeathtrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let obesitypredict = await obesitytrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let populationpredict = await populationtrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-        let gdppredict = await gdptrain.predict(tf.tensor2d(predYearsScaled, [predYearsScaled.length, 1])).dataSync();
-
-
-        // Converting Float Array back to regular array
-        let birthtestConvert = Array.from(birthTest);
-        let birthpredictConvert = Array.from(birthpredict);
-        let deathtestConvert = Array.from(deathTest);
-        let deathpredictConvert = Array.from(deathpredict);
-        let dtpConvert = Array.from(dtpTest);
-        let dtppredictConvert = Array.from(dtppredict);
-        let lifeConvert = Array.from(lifeTest);
-        let lifepredictConvert = Array.from(lifepredict);
-        let measlesImmConvert = Array.from(measlesImmTest);
-        let measlesImmpredictConvert = Array.from(measlesImmpredict);
-        let cancercaseConvert = Array.from(cancercaseTest);
-        let cancercasepredictConvert = Array.from(cancercasepredict);
-        let cancerdeathConvert = Array.from(cancerdeathTest);
-        let cancerdeathpredictConvert = Array.from(cancerdeathpredict);
-        let obesityConvert = Array.from(obesityTest);
-        let obesitypredictConvert = Array.from(obesitypredict);
-        let populationConvert = Array.from(populationTest);
-        let populationpredictConvert = Array.from(populationpredict);
-        let gdpConvert = Array.from(gdpTest);
-        let gdppredictConvert = Array.from(gdppredict);
-
-
-        // Reverse Scale the data
-        let tenYearBirth = conversion(maxArray(brithRate), minArray(brithRate), birthpredictConvert);
-        let tenYearBirthTest = conversion(maxArray(brithRate), minArray(brithRate), birthtestConvert);
-        let tenYearDeath = conversion(maxArray(deathRate), minArray(deathRate), deathpredictConvert);
-        let tenYearDeathTest = conversion(maxArray(deathRate), minArray(deathRate), deathtestConvert);
-        let tenYeardtp = conversion(maxArray(dtpImmunisation), minArray(dtpImmunisation), dtppredictConvert);
-        let tenYeardtpTest = conversion(maxArray(dtpImmunisation), minArray(dtpImmunisation), dtpConvert);
-        let tenYearlife = conversion(maxArray(lifeExpectency), minArray(lifeExpectency), lifepredictConvert);
-        let tenYearlifeTest = conversion(maxArray(lifeExpectency), minArray(lifeExpectency), lifeConvert);
-        let tenYearmeaslesImm = conversion(maxArray(measlesImmunisation), minArray(measlesImmunisation), measlesImmpredictConvert);
-        let tenYearmeaslesImmTest = conversion(maxArray(measlesImmunisation), minArray(measlesImmunisation), measlesImmConvert);
-        let tenYearCancerCase = conversion(maxArray(cancerCases), minArray(cancerCases), cancercasepredictConvert);
-        let tenYearCancerCaseTest = conversion(maxArray(cancerCases), minArray(cancerCases), cancercaseConvert);
-        let tenYearCancerDeaths = conversion(maxArray(cancerDeaths), minArray(cancerDeaths), cancerdeathpredictConvert);
-        let tenYearCancerDeathsTest = conversion(maxArray(cancerDeaths), minArray(cancerDeaths), cancerdeathConvert);
-        let tenYearObesity = conversion(maxArray(obesity), minArray(obesity), obesitypredictConvert);
-        let tenYearObesityTest = conversion(maxArray(obesity), minArray(obesity), obesityConvert);
-        let tenYearPopulation = conversion(maxArray(population), minArray(population), populationpredictConvert);
-        let tenYearpopulationTest = conversion(maxArray(population), minArray(population), populationConvert);
-        let tenYeargdp = conversion(maxArray(gdp), minArray(gdp), gdppredictConvert);
-        let tenYeargdpTest = conversion(maxArray(gdp), minArray(gdp), gdpConvert);
-        // Inform User that Training is Complete
-        d3.selectAll('#healthpredict').append('p').text("Machine Learning Complete, forecasts are available below");
-        d3.selectAll('#validate').html('');
-
-        d3.selectAll('#birthtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(-6), tenYearBirthTest))}%`);
-        d3.selectAll('#deathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(deathRate.slice(-6), tenYearDeathTest))}%`);
-        d3.selectAll('#dtptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(dtpImmunisation.slice(-6), tenYeardtpTest))}%`);
-        d3.selectAll('#lifetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(lifeExpectency.slice(-6), tenYearlifeTest))}%`);
-        d3.selectAll('#measlestag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(measlesImmunisation.slice(-6), tenYearmeaslesImmTest))}%`);
-        d3.selectAll('#cancercasetag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerCases.slice(-6), tenYearCancerCaseTest))}%`);
-        d3.selectAll('#cancerdeathtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerDeaths.slice(-6), tenYearCancerDeathsTest))}%`);
-        d3.selectAll('#obesitytag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(obesity.slice(-6), tenYearObesityTest))}%`);
-        d3.selectAll('#populationtag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(-6), tenYearpopulationTest))}%`);
-        d3.selectAll('#gdptag').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(gdp.slice(-6), tenYeargdpTest))}%`);
-
-        // console.log(mean(PerCentErrordif(brithRate.slice(-6),tenYearBirthTest)));
-
-        // Creating a plot and table
-        var layout = {
-            title: `${id}`,
-            font: {
-                color: 'black',
-                family: 'Arial',
-                size: 16
+        var births = document.getElementById("totalbirths").getContext('2d');
+        var BirthChart = new Chart(births, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: brithRatePred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Birth Rate',
+                    data: brithRate.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 3
+                },
+                {
+                    label: 'Upper Limit',
+                    data: brithRateHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: brithRateLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            paper_bgcolor: '#fffafb',
-            plot_bgcolor: '#fffafb'
-        };
-        var birthValues = [predYears, tenYearBirth]
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Total Births'
+                        }
+                    }],
 
-        var birthdata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Births</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
-            },
-            cells: {
-                values: birthValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+                },
+                title: {
+                    display: true,
+                    text: 'Total Number of Births',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predtotalbirths', birthdata, layout);
-
-        var deathValues = [predYears, tenYearDeath]
-
-        var deathdata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Deaths</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var deaths = document.getElementById("totaldeaths").getContext('2d');
+        var DeathChart = new Chart(deaths, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: deathRatePred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Death Rate',
+                    data: deathRate.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 3
+                },
+                {
+                    label: 'Upper Limit',
+                    data: deathRateHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: deathRateLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: deathValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Total Deaths'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'Total Number of Deaths',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
+        });
 
-        Plotly.newPlot('predtotaldeaths', deathdata, layout);
-
-        var dtpValues = [predYears, tenYeardtp]
-
-        var dtpdata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted DTP Immunisation Rates</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        var DTP = document.getElementById("dtp").getContext('2d');
+        var DTPChart = new Chart(DTP, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: dtpImmunisationPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual DTP Immunisation',
+                    data: dtpImmunisation.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: dtpImmunisationHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: dtpImmunisationLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: dtpValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'DTP Immunisations'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'DTP Immunisations',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('preddtp', dtpdata, layout);
-
-        var lifeValues = [predYears, tenYearlife]
-
-        var lifedata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Life Expectency</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var measles = document.getElementById("measles").getContext('2d');
+        var MeaslesChart = new Chart(measles, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: measlesImmunisationPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Measles Immunisation',
+                    data: measlesImmunisation.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: measlesImmunisationHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: measlesImmunisationLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: lifeValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Measles Immunisation'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'Total Number of Measles Immunisations',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predlife', lifedata, layout);
-
-        var measlesValues = [predYears, tenYearmeaslesImm]
-
-        var measlesdata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Measles Immunisation Rates</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var cancercase = document.getElementById("cancercases").getContext('2d');
+        var CancerCaseChart = new Chart(cancercase, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: cancerCasesPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Cancer Cases',
+                    data: cancerCases.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: cancerCasesHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: cancerCasesLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: measlesValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Cancer Cases'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'Total Number of Cancer Cases',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predmeasles', measlesdata, layout);
-
-        var cancerCaseValues = [predYears, tenYearCancerCase]
-
-        var CancerCasedata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Cancer Cases</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var cancerdeath = document.getElementById("cancerdeaths").getContext('2d');
+        var CancerDeathChart = new Chart(cancerdeath, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: cancerDeathsPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Cancer Deaths',
+                    data: cancerDeaths.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: cancerDeathsHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: cancerDeathsLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: cancerCaseValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Total Cancer Deaths'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'Total Number of Cancer Deaths',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predcancercases', CancerCasedata, layout);
-
-        var CancerDeathValues = [predYears, tenYearCancerDeaths]
-
-        var CancerDeathdata = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Cancer Deaths</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var obesityctx = document.getElementById("obesity").getContext('2d');
+        var ObesityChart = new Chart(obesityctx, {
+            type: 'line',
+            
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: obesityPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Obesity Rate',
+                    data: obesity.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: obesityHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: obesityLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: CancerDeathValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Total Obesity Numbers'
+                        },
+                        // gridLines: {
+                        //     display: true ,
+                        //     color: "white"
+                        //   },
+                    }],
+                    xAxes: [{
+                          scaleLabel: {
+                            display: true,
+                            labelString: 'Year'
+                        },
+                    }]
+
+                },
+                title: {
+                    display: true,
+                    text: 'Total Number of Obese People',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predcancerdeaths', CancerDeathdata, layout);
-
-        var ObesityValues = [predYears, tenYearObesity]
-
-        var ObesityData = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Obesity Rates</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var life = document.getElementById("life").getContext('2d');
+        var LifeChart = new Chart(life, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: lifeExpectencyPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Life Expectency Age',
+                    data: lifeExpectency.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: lifeExpectencyHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: lifeExpectencyLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: ObesityValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Life Expectency Age'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'Life Expectency',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predobesity', ObesityData, layout);
-
-        var PopulationValues = [predYears, tenYearPopulation]
-
-        var PopulationData = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Population</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var pop = document.getElementById("population").getContext('2d');
+        var PopulationChart = new Chart(pop, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: populationPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: 'Actual Population Numbers',
+                    data: population.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: populationHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: populationLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: PopulationValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Population'
+                        }
+                    }],
+
+                },
+                title: {
+                    display: true,
+                    text: 'Population',
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
             }
-        }]
-
-        Plotly.newPlot('predpopulation', PopulationData, layout);
-
-        var gdpValues = [predYears, tenYeargdp]
-
-        var gdpData = [{
-            type: 'table',
-            header: {
-                values: [["<b>2021-2030</b>"], ["<b>Predicted Gross Domestic Product</b>"]],
-                align: "center",
-                line: { width: 1, color: 'black' },
-                fill: { color: "#d91657" },
-                font: { family: "Arial", size: 12, color: "white" }
+        });
+        var gdpctx = document.getElementById("gdp").getContext('2d');
+        var GdpChart = new Chart(gdpctx, {
+            type: 'line',
+            data: {
+                labels: year,
+                datasets: [{
+                    label: 'Predicted',
+                    data: gdpPred,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 3
+                }, {
+                    label: `Actual Nation's GDP`,
+                    data: gdp.slice(0, 60),
+                    fill: false,
+                    pointRadius: 5,
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    borderColor: "rgba(0, 0, 0, 0.0)",
+                    borderWidth: 1
+                },
+                {
+                    label: 'Upper Limit',
+                    data: gdpHigh,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Lower Limit',
+                    data: gdpLow,
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    backgroundColor: "red",
+                    borderColor: 'red',
+                    borderWidth: 3
+                }]
             },
-            cells: {
-                values: gdpValues,
-                align: "center",
-                line: { color: "black", width: 1 },
-                font: { family: "Arial", size: 11, color: ["black"] }
-            }
-        }]
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Gross Domestic Product'
+                        }
+                    }],
 
-        Plotly.newPlot('predgdp', gdpData, layout);
+                },
+                title: {
+                    display: true,
+                    text: `Gross Domestic Product for ${id}`,
+                    fontSize: 20
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label;
+                        }
+                    }
+                }
+            }
+        });
+
 
     })
+
 }

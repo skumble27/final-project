@@ -13,141 +13,125 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel='stylesheet' scr='text/css' href="{{url_for('static',filename = 'css/financestyles.css')}}">
+    <link rel='stylesheet' scr='text/css' href="static/css/agristyles.css">
 
-    <title>Finance Forecast</title>
+    <title>Agriculture Forecast</title>
 </head>
 
 <body>
     <div class="row">
         <div class="navbarformat col-md-6">
             <nav class="navbar-light">
-                <a href="{{url_for('index')}}">
+                <a href="index.html">
                     <img src='static/css/images/MLAnalytics1.svg' width="200" height="50"
                         class="d-inline-block align-top" alt="" loading="lazy">
                 </a>
             </nav>
         </div>
         <div class="navbarformatright col-md-2">
-            <a href="{{url_for('agriculture')}}">Agriculture Sector</a>
+            <a href="healthsector.html">Healthcare Sector</a>
         </div>
         <div class="navbarformatright col-md-2">
-            <a href="{{url_for('healthcare')}}">Healthcare Sector</a>
+            <a href="financesector.html">Finance Sector</a>
         </div>
         <div class="navbarformatright col-md-2">
-            <a href="{{url_for('environment')}}">Environment Sector</a>
+            <a href="environment.html">Environment Sector</a>
         </div>
 
     </div>
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Finance Sector</h1>
+            <h1 class="display-4">Agriculture Sector</h1>
         </div>
-    </div><br><br><br>
+    </div>
 
     <div class="container">
         <div class="row">
-            <div class="finance col-md-12">
+            <div class="agri col-md-12">
                 <h1>Overview</h1>
                 <hr>
             </div>
             <div class="col-md-12">
-                <div class='mapformat' id='financemapid'></div>
+                <div class="mapformat" id='agrimapid'></div>
             </div>
-        </div><br><br><br>
-
+        </div><br><br>
         <div class="row">
-            <div id='financedataplotly' class="finance col-md-12">
+            <div id='agridataplotly' class="agri col-md-12">
                 <h1></h1>
             </div>
         </div>
-        <!-- Time Series Data Using Plotly -->
+
+        <!-- Plotting the Time Series -->
         <div class="row">
             <div class="col-md-6">
-                <div id='broadmoney'></div>
+                <div id='agriland'></div>
             </div>
             <div class="col-md-6">
-                <div id='domesticcompanies'></div>
+                <div id='forestland'></div>
             </div>
             <div class="col-md-6">
-                <div id='gdp'></div>
+                <div id='cereal'></div>
             </div>
             <div class="col-md-6">
-                <div id='foreigninvestment'></div>
+                <div id='cashcrop'></div>
             </div>
             <div class="col-md-6">
-                <div id='inflation'></div>
-            </div>
-
-            <div class="col-md-6">
-                <div id='stockstraded'></div>
+                <div id='employmentag'></div>
             </div>
             <div class="col-md-6">
-                <div id='totalreserves'></div>
+                <div id='livestock'></div>
             </div>
 
         </div>
 
         <div class="machinelearning">
-            <div id='validate'>
-                <h2></h2>
-            </div>
-            <div id='broadmoneylog'></div>
-            <div id='domesticcomplog'></div>
-            <div id='gdplog'></div>
-            <div id='foreignlog'></div>
-            <div id='inflationlog'></div>
-            <div id='stockslog'></div>
-            <div id='cashreserveslog'></div>
+            <div id='validate'><h2></h2></div>
+            <div id='agrilog'></div>
+            <div id='forlog'></div>
+            <div id='cereallog'></div>
+            <div id='cashlog'></div>
+            <div id='emplog'></div>
+            <div id='livestocklog'></div>
         </div>
 
+
+
         <div class="row">
-            <div id='financepredict' class="finance col-md-12">
+            <div id='agripredict' class="agri col-md-12">
                 <h2></h2>
                 <h3></h3>
                 <p></p>
             </div>
         </div>
 
-        <!-- Predictive Analysis Tables -->
         <div class="row">
             <div class="col-md-6">
-                <div id='predbroadmoney'></div>
-                <div id='broadmoneytag'></div>
+                <!-- Plotting the time series -->
+                <div id='predagri'></div>
+                <div id='agritag'></div>
             </div>
             <div class="col-md-6">
-                <div id='preddomesticcompanies'></div>
-                <div id='domesticcomptag'></div>
+                <div id='predfor'></div>
+                <div id='fortag'></div>
             </div>
             <div class="col-md-6">
-                <div id='predgdp'></div>
-                <div id='gdptag'></div>
+                <div id='predcereal'></div>
+                <div id='cerealtag'></div>
             </div>
             <div class="col-md-6">
-                <div id='predforeigninvestment'></div>
-                <div id='foreigntag'></div>
+                <div id='predcash'></div>
+                <div id='cashcroptag'></div>
             </div>
             <div class="col-md-6">
-                <div id='predinflation'></div>
-                <div id='inflationtag'></div>
-            </div>
-
-            <div class="col-md-6">
-                <div id='predstockstraded'></div>
-                <div id='stockstag'></div>
+                <div id='predemp'></div>
+                <div id='emptag'></div>
             </div>
             <div class="col-md-6">
-                <div id='predtotalreserves'></div>
-                <div id='cashreservetag'></div>
+                <div id='predlive'></div>
+                <div id='livestocktag'></div>
             </div>
-
         </div>
-
-        <div class="row">
-
-        </div>
-
     </div>
 
     <footer class="footer">
@@ -158,6 +142,7 @@
         </div>
 
     </footer>
+
     <!-- Leaflet Library -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
         integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
@@ -176,12 +161,11 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!-- Custom JavaScript Libraries -->
-    <script src="{{url_for('static', filename='js/mathsfunctions.js')}}"></script>
-    <script src="{{url_for('static', filename='js/financejs/financepredictive.js')}}"></script>
-    <script src="{{url_for('static', filename='js/config.js')}}"></script>
-    <script src="{{url_for('static', filename='js/financejs/finance.js')}}"></script>
-    <script src="{{url_for('static', filename='js/financejs/financemain.js')}}"></script>
 
+    <script src="static/js/config.js"></script>
+    <script src="static/js/mathsfunctions.js"></script>
+    <script src="static/js/agriculturejs/agripredict.js"></script>
+    <script src="static/js/agriculturejs/agrimain.js"></script>
 
 </body>
 

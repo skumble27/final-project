@@ -9,7 +9,7 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel='stylesheet' scr='text/css' href="{{url_for('static',filename = 'css/styles.css')}}">
+    <link rel='stylesheet' scr='text/css' href="static/css/styles.css">
 
     <title>Sector Forecast</title>
 
@@ -18,7 +18,7 @@
 <body>
 
     <nav class="navbarformat navbar-light">
-        <a href="{{url_for('index')}}">
+        <a href="index.html">
             <img src='static/css/images/MLAnalytics.svg' width="200" height="50" class="d-inline-block align-top" alt=""
                 loading="lazy">
         </a>
@@ -31,21 +31,21 @@
 
         <div class="row">
             <div class="health col-md-6">
-                <a href="{{url_for('healthcare')}}">Health Care Sector</a>
+                <a href="healthsector.html">Health Care Sector</a>
             </div>
 
             <div class="agricutlure col-md-6">
-                <a href="{{url_for('agriculture')}}">Agricultural Sector</a>
+                <a href="agriculturesector.html">Agricultural Sector</a>
             </div>
 
         </div>
         <div class="row">
             <div class="finance col-md-6">
-                <a href="{{url_for('finance')}}">Financial Sector</a>
+                <a href="financesector.html">Financial Sector</a>
             </div>
 
             <div class="environment col-md-6">
-                <a href="{{url_for('environment')}}">Environment</a>
+                <a href="environment.html">Environment</a>
             </div>
         </div>
 
