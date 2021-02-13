@@ -68,73 +68,30 @@
         <div class="row">
             <div class="col-md-6">
                 <!-- Plotting the time series -->
-                <div id='p25airpoll'></div>
+                <canvas id='p25airpoll'></canvas>
             </div>
             <div class="col-md-6">
-                <div id='population'></div>
+                <canvas id='electricity'></canvas>
+            </div>
+
+            <div class="col-md-6">
+                <canvas id='renewable'></canvas>
+            </div>
+
+            <div class="col-md-6">
+                <canvas id='population'></canvas>
+            </div>
+
+
+            <div class="col-md-6">
+                <canvas id='urbanpopulation'></canvas>
             </div>
             <div class="col-md-6">
-                <div id='electricity'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='renewable'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='urbanpopulation'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='electricityconsumption'></div>
+                <canvas id='electricityconsumption'></canvas>
             </div>
 
         </div>
 
-        <div class="machinelearning">
-            <div id='validate'><h2></h2></div>
-            <div id='airpollog'></div>
-            <div id='poplog'></div>
-            <div id='electriclog'></div>
-            <div id='renewablelog'></div>
-            <div id='urbanpoplog'></div>
-            <div id='electricuselog'></div>
-        </div>
-
-        <div class="row">
-            <div id='environmentpredict' class="environment col-md-12">
-                <h2></h2>
-                <h3></h3>
-                <p></p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <!-- Plotting the time series -->
-                <div id='predp25airpoll'></div>
-                <div id='airpoltag'></div>
-
-            </div>
-            <div class="col-md-6">
-                <div id='predpopulation'></div>
-                <div id='poptag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predelectricity'></div>
-                <div id='electrictag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predrenewable'></div>
-                <div id='renewabletag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predurbanpopulation'></div>
-                <div id='urbanpoptag'></div>
-            </div>
-            <div class="col-md-6">
-                <div id='predelectricityconsumption'></div>
-                <div id='electricusetag'></div>
-            </div>
-
-        </div>
     </div>
 
     <footer class="footer">
@@ -145,6 +102,14 @@
         </div>
 
     </footer>
+
+    <!-- Chart js -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Leaflet Library -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
