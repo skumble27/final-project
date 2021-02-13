@@ -115,30 +115,8 @@ d3.json(link).then(function (data) {
     d3.selectAll('#population').html('');
     d3.selectAll('#gdp').html('');
 
-    d3.selectAll('#predtotalbirths').html('');
-    d3.selectAll('#predtotaldeaths').html('');
-    d3.selectAll('#preddtp').html('');
-    d3.selectAll('#predlife').html('');
-    d3.selectAll('#predmeasles').html('');
-    d3.selectAll('#predcancercases').html('');
-    d3.selectAll('#predcancerdeaths').html('');
-    d3.selectAll('#predobesity').html('');
-    d3.selectAll('#predpopulation').html('');
-    d3.selectAll('#predgdp').html('');
-
-    d3.selectAll('#birthtag').html('');
-    d3.selectAll('#deathtag').html('');
-    d3.selectAll('#dtptag').html('');
-    d3.selectAll('#lifetag').html('');
-    d3.selectAll('#measlestag').html('');
-    d3.selectAll('#cancercasetag').html('');
-    d3.selectAll('#cancerdeathtag').html('');
-    d3.selectAll('#obesitytag').html('');
-    d3.selectAll('#populationtag').html('');
-    d3.selectAll('#gdptag').html('');
-
-    d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data`);
-    d3.selectAll('#healthpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
+    d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data with a 10 Year Forecast`);
+  
 
     console.log(chosenCountry);
     
