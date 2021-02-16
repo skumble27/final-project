@@ -104,27 +104,12 @@ d3.json(link).then(function (data) {
     d3.selectAll('#environmentplotly').html('');
     d3.selectAll('#environmentpredict').html('');
 
-    d3.selectAll('#p25airpoll').html('');
-    d3.selectAll('#population').html('');
-    d3.selectAll('#electricity').html('');
-    d3.selectAll('#renewable').html('');
-    d3.selectAll('#urbanpopulation').html('');
-    d3.selectAll('#electricityconsumption').html('');
-
-    d3.selectAll('#predp25airpoll').html('');
-    d3.selectAll('#predpopulation').html('');
-    d3.selectAll('#predelectricity').html('');
-    d3.selectAll('#predrenewable').html('');
-    d3.selectAll('#predurbanpopulation').html('');
-    d3.selectAll('#predelectricityconsumption').html('');
-
-    d3.selectAll('#airpoltag').html('');
-    d3.selectAll('#poptag').html('');
-    d3.selectAll('#electrictag').html('');
-    d3.selectAll('#renewabletag').html('');
-    d3.selectAll('#urbanpoptag').html('');
-    d3.selectAll('#electricusetag').html('');
-
+    d3.selectAll('#mpep25airpoll').html('');
+    d3.selectAll('#mpepopulation').html('');
+    d3.selectAll('#mpeelectric').html('');
+    d3.selectAll('#mperenewable').html('');
+    d3.selectAll('#mpeurban').html('');
+    d3.selectAll('#mpeelectricconsumption').html('');
 
 
     d3.selectAll('#environmentplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Environmental Data`);

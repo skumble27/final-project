@@ -103,30 +103,13 @@ d3.json(link).then(function (data) {
         d3.selectAll('#financedataplotly').html('');
         d3.selectAll('#financepredict').html('');
 
-        d3.selectAll('#broad').html('');
-        d3.selectAll('#domesticcompanies').html('');
-        d3.selectAll('#gdp').html('');
-        d3.selectAll('#foreigninvestment').html('');
-        d3.selectAll('#inflation').html('');
-        d3.selectAll('#stockstraded').html('');
-        d3.selectAll('#totalreserves').html('');
-
-        d3.selectAll('#predbroadmoney').html('');
-        d3.selectAll('#preddomesticcompanies').html('');
-        d3.selectAll('#predgdp').html('');
-        d3.selectAll('#predforeigninvestment').html('');
-        d3.selectAll('#predinflation').html('');
-        d3.selectAll('#predstockstraded').html('');
-        d3.selectAll('#predtotalreserves').html('');
-
-        d3.selectAll('#broadmoneytag').html('');
-        d3.selectAll('#domesticcomptag').html('');
-        d3.selectAll('#gdptag').html('');
-        d3.selectAll('#foreigntag').html('');
-        d3.selectAll('#inflationtag').html('');
-        d3.selectAll('#stockstag').html('');
-        d3.selectAll('#cashreservetag').html('');
-
+        d3.selectAll('#mpebroadmoney').html('');
+        d3.selectAll('#mpedomesctic').html('');
+        d3.selectAll('#mpeinflation').html('');
+        d3.selectAll('#mpeforeign').html('');
+        d3.selectAll('#mpestockstraded').html('');
+        d3.selectAll('#mpetotalreserves').html('');
+        
 
         d3.selectAll('#financedataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Finance Sector Data`);
         d3.selectAll('#financepredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);

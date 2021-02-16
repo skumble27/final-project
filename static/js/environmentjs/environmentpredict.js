@@ -161,7 +161,10 @@ async function environmentPredict(id) {
                 }
             }
         });
-
+        
+        d3.selectAll('#mpep25airpoll').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(p25airpol.slice(0,60),p25airpolPred.slice(0,60)))}%`);
+        
+        
         var electricity = document.getElementById("electricity").getContext('2d');
         var electricChart = new Chart(electricity, {
             type: 'line',
@@ -240,6 +243,8 @@ async function environmentPredict(id) {
             }
         });
 
+        d3.selectAll('#mpeelectric').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(electricityacess.slice(0,60),electricityacessPred.slice(0,60)))}%`);
+
         var renewableEnergy = document.getElementById("renewable").getContext('2d');
         var renewableChart = new Chart(renewableEnergy, {
             type: 'line',
@@ -317,6 +322,10 @@ async function environmentPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mperenewable').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(renewable.slice(0,60),renewablePred.slice(0,60)))}%`);
+
+
         var pop = document.getElementById("population").getContext('2d');
         var PopulationChart = new Chart(pop, {
             type: 'line',
@@ -394,6 +403,8 @@ async function environmentPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpepopulation').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(0,60),populationPred.slice(0,60)))}%`);
 
         var urbanpopulation = document.getElementById("urbanpopulation").getContext('2d');
         var UrbanPopChart = new Chart(urbanpopulation, {
@@ -473,6 +484,8 @@ async function environmentPredict(id) {
             }
         });
 
+        d3.selectAll('#mpeurban').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(urbanpop.slice(0,60),urbanpopPred.slice(0,60)))}%`);
+
         var electricconsumpt = document.getElementById("electricityconsumption").getContext('2d');
         var electricConsumpChart = new Chart(electricconsumpt, {
             type: 'line',
@@ -550,6 +563,7 @@ async function environmentPredict(id) {
                 }
             }
         });
+        d3.selectAll('#mpeelectricconsumption').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(electricUse.slice(0,60),electricUsePred.slice(0,60)))}%`);
 
     })
 }

@@ -180,6 +180,9 @@ async function financePredict(id) {
             }
         });
 
+        d3.selectAll('#mpebroadmoney').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(broadMoneyGrowth.slice(0,60),broadMoneyGrowthPred.slice(0,60)))}%`);
+
+
         var domestic = document.getElementById("domesticcompanies").getContext('2d');
         var DomesticChart = new Chart(domestic, {
             type: 'line',
@@ -267,6 +270,8 @@ async function financePredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpedomesctic').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(domesticCompanies.slice(0,60),domesticCompaniesPred.slice(0,60)))}%`);
 
         var foreign = document.getElementById("foreigninvestment").getContext('2d');
         var ForeignChart = new Chart(foreign, {
@@ -356,6 +361,7 @@ async function financePredict(id) {
             }
         });
 
+        d3.selectAll('#mpeforeign').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(foreignInvestment.slice(0,60),foreignInvestmentPred.slice(0,60)))}%`);
 
         var inflations = document.getElementById("inflation").getContext('2d');
         var InflationChart = new Chart(inflations, {
@@ -445,6 +451,8 @@ async function financePredict(id) {
             }
         });
 
+        d3.selectAll('#mpeinflation').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(inflation.slice(0,60),inflationPred.slice(0,60)))}%`);
+
         var stocks = document.getElementById("stockstraded").getContext('2d');
         var StocksChart = new Chart(stocks, {
             type: 'line',
@@ -533,6 +541,8 @@ async function financePredict(id) {
             }
         });
 
+        d3.selectAll('#mpestockstraded').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(stockTrade.slice(0,60),stockTradePred.slice(0,60)))}%`);
+
         var reserves = document.getElementById("totalreserves").getContext('2d');
         var ReservesChart = new Chart(reserves, {
             type: 'line',
@@ -620,6 +630,8 @@ async function financePredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpetotalreserves').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(totalReserves.slice(0,60),totalReservesPred.slice(0,60)))}%`);
 
 
     })
