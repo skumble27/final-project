@@ -112,7 +112,7 @@ d3.json(link).then(function (data) {
     d3.selectAll('#mpelivestock').html('');
 
 
-    d3.selectAll('#agridataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Agricultural Sector Data`);
+    d3.selectAll('#agridataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Agricultural Sector Data and a 10 Year Forecast`);
     d3.selectAll('#agripredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`)
 
     agriPredict(chosenCountry);

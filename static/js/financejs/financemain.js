@@ -111,7 +111,7 @@ d3.json(link).then(function (data) {
         d3.selectAll('#mpetotalreserves').html('');
         
 
-        d3.selectAll('#financedataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Finance Sector Data`);
+        d3.selectAll('#financedataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Economic Activity and a Ten Year Forecast`);
         d3.selectAll('#financepredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
 
         console.log(chosenCountry);

@@ -112,7 +112,7 @@ d3.json(link).then(function (data) {
     d3.selectAll('#mpeelectricconsumption').html('');
 
 
-    d3.selectAll('#environmentplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Environmental Data`);
+    d3.selectAll('#environmentplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Environmental Data and a Ten Year Forecast`);
     d3.selectAll('#environmentpredict').append('h1').text(`10 Year Forecasts for ${chosenCountry}`);
 
 
