@@ -200,6 +200,13 @@ async function healthPredict(id) {
                 }
             }
         });
+        
+        d3.selectAll('#mpebirths').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(0,60),brithRatePred.slice(0,60)))}%`);
+
+
+
+
+
         var deaths = document.getElementById("totaldeaths").getContext('2d');
         var DeathChart = new Chart(deaths, {
             type: 'line',
@@ -278,14 +285,16 @@ async function healthPredict(id) {
             }
         });
 
+        d3.selectAll('#mpedeaths').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(deathRate.slice(0,60),deathRatePred.slice(0,60)))}%`);
+
         var DTP = document.getElementById("dtp").getContext('2d');
         var DTPChart = new Chart(DTP, {
             type: 'line',
             data: {
-                labels: year,
+                labels: year.slice(-47),
                 datasets: [{
                     label: 'Predicted',
-                    data: dtpImmunisationPred,
+                    data: dtpImmunisationPred.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -294,7 +303,7 @@ async function healthPredict(id) {
                     borderWidth: 3
                 }, {
                     label: 'Actual DTP Immunisation',
-                    data: dtpImmunisation.slice(0, 60),
+                    data: dtpImmunisation.slice(23,61),
                     fill: false,
                     pointRadius: 5,
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -303,7 +312,7 @@ async function healthPredict(id) {
                 },
                 {
                     label: 'Upper Limit',
-                    data: dtpImmunisationHigh,
+                    data: dtpImmunisationHigh.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -313,7 +322,7 @@ async function healthPredict(id) {
                 },
                 {
                     label: 'Lower Limit',
-                    data: dtpImmunisationLow,
+                    data: dtpImmunisationLow.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -355,14 +364,17 @@ async function healthPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpedtp').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(dtpImmunisation.slice(23,61),dtpImmunisationPred.slice(23,61)))}%`);
+
         var measles = document.getElementById("measles").getContext('2d');
         var MeaslesChart = new Chart(measles, {
             type: 'line',
             data: {
-                labels: year,
+                labels: year.slice(-47),
                 datasets: [{
                     label: 'Predicted',
-                    data: measlesImmunisationPred,
+                    data: measlesImmunisationPred.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -371,7 +383,7 @@ async function healthPredict(id) {
                     borderWidth: 3
                 }, {
                     label: 'Actual Measles Immunisation',
-                    data: measlesImmunisation.slice(0, 60),
+                    data: measlesImmunisation.slice(23, 61),
                     fill: false,
                     pointRadius: 5,
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -380,7 +392,7 @@ async function healthPredict(id) {
                 },
                 {
                     label: 'Upper Limit',
-                    data: measlesImmunisationHigh,
+                    data: measlesImmunisationHigh.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -390,7 +402,7 @@ async function healthPredict(id) {
                 },
                 {
                     label: 'Lower Limit',
-                    data: measlesImmunisationLow,
+                    data: measlesImmunisationLow.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -432,6 +444,7 @@ async function healthPredict(id) {
                 }
             }
         });
+        d3.selectAll('#mpemeasles').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(measlesImmunisation.slice(23,61),measlesImmunisationPred.slice(23,61)))}%`);
         var cancercase = document.getElementById("cancercases").getContext('2d');
         var CancerCaseChart = new Chart(cancercase, {
             type: 'line',
@@ -509,6 +522,9 @@ async function healthPredict(id) {
                 }
             }
         });
+        
+        d3.selectAll('#mpecancercase').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerCases.slice(0,60),cancerCasesPred.slice(0,60)))}%`);
+        
         var cancerdeath = document.getElementById("cancerdeaths").getContext('2d');
         var CancerDeathChart = new Chart(cancerdeath, {
             type: 'line',
@@ -586,6 +602,10 @@ async function healthPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpecancerdeaths').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cancerDeaths.slice(0,60),cancerDeathsPred.slice(0,60)))}%`);
+
+
         var obesityctx = document.getElementById("obesity").getContext('2d');
         var ObesityChart = new Chart(obesityctx, {
             type: 'line',
@@ -674,6 +694,8 @@ async function healthPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpeobesity').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(obesity.slice(0,60),obesityPred.slice(0,60)))}%`);
         var life = document.getElementById("life").getContext('2d');
         var LifeChart = new Chart(life, {
             type: 'line',
@@ -751,6 +773,9 @@ async function healthPredict(id) {
                 }
             }
         });
+        
+        d3.selectAll('#mpelife').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(lifeExpectency.slice(0,60),lifeExpectencyPred.slice(0,60)))}%`);
+        
         var pop = document.getElementById("population").getContext('2d');
         var PopulationChart = new Chart(pop, {
             type: 'line',
@@ -828,6 +853,9 @@ async function healthPredict(id) {
                 }
             }
         });
+        
+        d3.selectAll('#mpepopulation').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(population.slice(0,60),populationPred.slice(0,60)))}%`);
+        
         var gdpctx = document.getElementById("gdp").getContext('2d');
         var GdpChart = new Chart(gdpctx, {
             type: 'line',
@@ -905,6 +933,7 @@ async function healthPredict(id) {
                 }
             }
         });
+        d3.selectAll('#mpegdp').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(gdp.slice(0,60),gdpPred.slice(0,60)))}%`);
 
 
     })

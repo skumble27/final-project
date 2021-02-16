@@ -193,6 +193,7 @@ async function agriPredict(id) {
                 }
             }
         });
+        d3.selectAll('#mpeagri').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(agriLand.slice(0,60),agriLandPred.slice(0,60)))}%`);
 
         var forest = document.getElementById("forestland").getContext('2d');
         var ForestChart = new Chart(forest, {
@@ -271,6 +272,7 @@ async function agriPredict(id) {
                 }
             }
         });
+        d3.selectAll('#mpeforest').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(forestLand.slice(0,60),forestLandPred.slice(0,60)))}%`);
 
         var cereal = document.getElementById("cereal").getContext('2d');
         var CerealChart = new Chart(cereal, {
@@ -350,6 +352,8 @@ async function agriPredict(id) {
             }
         });
 
+        d3.selectAll('#mpecereal').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cerealYield.slice(0,60),cerealYieldPred.slice(0,60)))}%`);
+
         var cash = document.getElementById("cashcrop").getContext('2d');
         var CashChart = new Chart(cash, {
             type: 'line',
@@ -427,6 +431,9 @@ async function agriPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpecash').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(cashCropYield.slice(0,60),cashCropYieldPred.slice(0,60)))}%`);
+
         var employment = document.getElementById("employmentag").getContext('2d');
         var EmploymentChart = new Chart(employment, {
             type: 'line',
@@ -504,14 +511,17 @@ async function agriPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpeemp').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(employmentAg.slice(0,60),employmentAgPred.slice(0,60)))}%`);
+        
         var livestock = document.getElementById("livestock").getContext('2d');
         var LivestockChart = new Chart(livestock, {
             type: 'line',
             data: {
-                labels: year,
+                labels: year.slice(-47),
                 datasets: [{
                     label: 'Predicted',
-                    data: liveStockProdPred,
+                    data: liveStockProdPred.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -520,7 +530,7 @@ async function agriPredict(id) {
                     borderWidth: 3
                 }, {
                     label: 'Actual Livestock Production',
-                    data: liveStockProd.slice(0, 60),
+                    data: liveStockProd.slice(23, 61),
                     fill: false,
                     pointRadius: 5,
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -529,7 +539,7 @@ async function agriPredict(id) {
                 },
                 {
                     label: 'Upper Limit',
-                    data: liveStockProdHigh,
+                    data: liveStockProdHigh.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -539,7 +549,7 @@ async function agriPredict(id) {
                 },
                 {
                     label: 'Lower Limit',
-                    data: liveStockProdLow,
+                    data: liveStockProdLow.slice(-47),
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
@@ -581,6 +591,9 @@ async function agriPredict(id) {
                 }
             }
         });
+
+        d3.selectAll('#mpelivestock').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(liveStockProd.slice(23,61),liveStockProdPred.slice(23,61)))}%`);
+        
 
 
     })

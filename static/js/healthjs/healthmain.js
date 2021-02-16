@@ -104,16 +104,16 @@ d3.json(link).then(function (data) {
     d3.selectAll('#healthdataplotly').html('');
     d3.selectAll('#healthpredict').html('');
 
-    d3.selectAll('#totalbirths').html('');
-    d3.selectAll('#totaldeaths').html('');
-    d3.selectAll('#dtp').html('');
-    d3.selectAll('#life').html('');
-    d3.selectAll('#measles').html('');
-    d3.selectAll('#cancercases').html('');
-    d3.selectAll('#cancerdeaths').html('');
-    d3.selectAll('#obesity').html('');
-    d3.selectAll('#population').html('');
-    d3.selectAll('#gdp').html('');
+    d3.selectAll('#mpebirths').html('');
+    d3.selectAll('#mpedeaths').html('');
+    d3.selectAll('#mpedtp').html('');
+    d3.selectAll('#mpelife').html('');
+    d3.selectAll('#mpemeasles').html('');
+    d3.selectAll('#mpecancercase').html('');
+    d3.selectAll('#mpecancerdeaths').html('');
+    d3.selectAll('#mpeobesity').html('');
+    d3.selectAll('#mpepopulation').html('');
+    d3.selectAll('#mpegdp').html('');
 
     d3.selectAll('#healthdataplotly').append('h1').text(`${chosenCountry}'s 60 Years of Historical Health Sector Data with a 10 Year Forecast`);
   

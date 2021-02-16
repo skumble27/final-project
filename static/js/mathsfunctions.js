@@ -88,3 +88,18 @@ function SimpleMovingAverage(array,window){
     return SAM;
 
 };
+
+function MeanSquaredError(array, arrayI) {
+    let percentdiff = [];
+    array.forEach((element, elementI) => {
+
+        let num2 = arrayI[elementI];
+
+        let diff = Math.pow((element-num2),2)
+
+        percentdiff.push(diff);
+
+    });
+
+    return percentdiff;
+}
