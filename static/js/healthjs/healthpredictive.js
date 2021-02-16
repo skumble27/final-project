@@ -204,9 +204,6 @@ async function healthPredict(id) {
         d3.selectAll('#mpebirths').append('p').text(`Mean Percentage Error: ${mean(PerCentErrordif(brithRate.slice(0,60),brithRatePred.slice(0,60)))}%`);
 
 
-
-
-
         var deaths = document.getElementById("totaldeaths").getContext('2d');
         var DeathChart = new Chart(deaths, {
             type: 'line',
