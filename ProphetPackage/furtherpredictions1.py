@@ -112,11 +112,11 @@ for country in countries_list:
     future['ds'] = pd.to_datetime(future['ds'])
     prediction = model.predict(future)
     prediction1 = prediction.drop(columns=['trend','trend_lower',	'trend_upper',	'additive_terms',	'additive_terms_lower',	'additive_terms_upper',	'yearly',	'yearly_lower',	'yearly_upper',	'multiplicative_terms',	'multiplicative_terms_lower','multiplicative_terms_upper'])
-    prediction1.to_csv(f'E:/My Documents/Professional Development/Monash University Data Analytics Boot Camp/GitHubRepo/final-project/ProphetPackage/urban_population_pct/{country}urban_population_pct.csv')
+    prediction1.to_csv(f'E:/My Documents/Professional Development/Monash University Data Analytics Boot Camp/GitHubRepo/final-project/test.csv')
     prediction1
 
     # Comparing the predicted and test
     model.plot(prediction)
-    # plt.show()
+    plt.show()
 print(countries_list)
         
