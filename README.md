@@ -38,5 +38,10 @@ A Sample of the training outcome has been provided below:
 
 **Development of the Web Dashboard**
 
-Upon completion of the training across the datasets for the selected APEC countries, HTML, CSS and JavaScript were utilised in develop a dashboard for users to obtain information on the historical data and ten year forecast for each country. 
+Upon completion of the training across the datasets for the selected APEC countries, HTML, CSS and JavaScript were utilised in develop a dashboard for users to obtain information on the historical data and ten year forecast for each country. Upon landing on the main website, users have the option to select a particular as shown in the diagram below:
 
+![Landing Page](https://github.com/skumble27/final-project/raw/main/images/Landingpage.gif)
+
+The same techniques that were applied to the healthcare sector were also applied to the Economy, Agricultural and Environment sector where data relating to each country can be visualised for historical and predicted data. 
+
+In order to launch the application onto the Heroku platform, a PHP file was created in order for the Heroku platform to deploy the application onto the cloud. Access to the final app is available in this [link](https://sector-forecast-final-project.herokuapp.com/index.html)
