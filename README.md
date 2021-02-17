@@ -28,9 +28,15 @@ In order to create the interactive maps, geojson polygons were extracted from th
 
 **Applying Machine Learning Algorithms for ETL Datasets**
 
-Initially, the objective was to apply machine learning in real-time using the Tensorflow Javascript module within the browser. Taking this into consideration, users could click on the country whereby the Tensorflow would study all the datasets relating to that country and provide a chart that shows historical data followed by a ten year forecast along with the accuracy of the predictive module. Unfortunately, this did not result in a very accurate prediction, especially for time series based datasets. Therefore, as an alternative, a new package was utilised, known as [Facebook Prophet](https://facebook.github.io/prophet/), which is a Python based Machine Learning module and has the  capacity to train and develop far more accurate predictions based on time series datasets as well as handling major issues such as erratic and noisy data. However, in terms of logistics, a series of codes needed to be developed in order for the module to be trained across a variety of datasets and parameters in a semi-automatic process. As such, a python script was developed wherein a list of all the countries were created, along with a list of all the parameters within in each sector and iterated in a *for loop* through the algorithm in which to automatically export the results of the training and test data in a CSV format, which in turn was loaded into the repository for subsequent app development. 
+Initially, the objective was to apply machine learning in real-time using the Tensorflow Javascript module within the browser. Taking this into consideration, users could click on the country whereby the Tensorflow would study all the datasets relating to that country and provide a chart that shows historical data followed by a ten year forecast along with the accuracy of the predictive module. Unfortunately, this did not result in a very accurate prediction, especially for time series based datasets. Therefore, as an alternative, a new package was utilised, known as [Facebook Prophet](https://facebook.github.io/prophet/), which is a Python based Machine Learning module and has the  capacity to train and develop far more accurate predictions based on time series datasets as well as handling major issues such as erratic and noisy data. However, in terms of logistics, a series of codes needed to be developed in order for the module to be trained across a variety of datasets and parameters in a semi-automatic process. As such, a python script was developed wherein a list of all the countries were created, along with a list of all the parameters within in each sector and iterated in a *for loop* through the algorithm in which to automatically export the results of the training and test data in a CSV format, which in turn was loaded into the repository for subsequent app development.
+
+A Sample of the training outcome has been provided below:
+
+![Facebook Prophet](https://raw.githubusercontent.com/skumble27/final-project/main/images/pilotstudy.png) 
+
+*Figure 2:Facebook Prophet Algorithm*
 
 **Development of the Web Dashboard**
 
-
+Upon completion of the training across the datasets for the selected APEC countries, HTML, CSS and JavaScript were utilised in develop a dashboard for users to obtain information on the historical data and ten year forecast for each country. 
 
