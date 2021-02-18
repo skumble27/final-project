@@ -125,5 +125,13 @@ body {
     background-color: #d7ffe8;
 }
 
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+      
+}
+
 
 
